@@ -1,0 +1,17 @@
+version: '3.5'
+services:
+  postgresserver:
+    image: postgres:alpine
+    container_name: postgresserver
+    hostname: postgres-server
+    restart: always
+    ports:
+      - "4444:5432"
+    environment:
+      POSTGRES_DB: wywy_db
+      POSTGRES_USER: wywy
+      POSTGRES_PASSWORD: 123456
+      PGPORT: 5432
+      POSTGRES_HOST_AUTH_METHOD: trust
+    command: 
+      -c ssl=off
