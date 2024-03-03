@@ -26,7 +26,8 @@ func envPath() string {
 
 func main() {
     e := echo.New()
-    e.Static("/", "assets")
+    //e.Static("/", "assets")
+    e.Static("/", "public")
     //  e.Use(loggerMiddleware)
     e.Use(middleware.Logger())
     cfg := config.LoadConfig(envPath())

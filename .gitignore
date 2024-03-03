@@ -29,6 +29,7 @@
 vendor/
 vendor
 /Godeps/
+/node_modules
 
 # Customs
 *.env*
@@ -42,3 +43,13 @@ apikey.txt
 !.air.example.toml
 !.env.example
 
+# vercel
+.vercel
+
+**/*.trace
+**/*.zip
+**/*.tar.gz
+**/*.tgz
+**/*.log
+package-lock.json
+**/*.bun

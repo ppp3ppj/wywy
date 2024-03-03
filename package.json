@@ -1,0 +1,19 @@
+{
+  "name": "wywy",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev:tailwind": "bun run build:tailwind -- --watch",
+    "build:tailwind": "tailwindcss -i ./assets/css/styles.css -o ./public/tailwind.css"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "daisyui": "latest",
+    "tailwindcss": "^3.4.1"
+  }
+}
