@@ -37,3 +37,8 @@ vendor
 *.pem
 apikey.txt
 *.txt
+
+# Example files
+!.air.example.toml
+!.env.example
+
