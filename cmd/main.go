@@ -5,12 +5,15 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/a-h/templ"
 	"github.com/ppp3ppj/wywy/config"
 	"github.com/ppp3ppj/wywy/db"
 	"github.com/ppp3ppj/wywy/services"
 
 	"github.com/labstack/echo/v4"
-//	"github.com/labstack/echo/v4/middleware"
+	"github.com/labstack/echo/v4/middleware"
+	//	"github.com/labstack/echo/v4/middleware"
+	"github.com/ppp3ppj/wywy/views/auth_views"
 )
 
 func envPath() string {
@@ -24,13 +27,21 @@ func envPath() string {
 func main() {
     e := echo.New()
     e.Static("/", "assets")
-    e.Use(loggerMiddleware)
+    //  e.Use(loggerMiddleware)
+    e.Use(middleware.Logger())
     cfg := config.LoadConfig(envPath())
     db := db.DbConnect(cfg.Db())
 
     us := services.NewUserService(services.User{}, db)
     _ = us
+
+    e.GET("/", func(c echo.Context) error {
+        component := auth_views.HomeIndex()
+        return Render(c, http.StatusOK, component)
+    })
+
     e.Logger.Fatal(e.Start(":1323"))
+
 }
 
 func loggerMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
@@ -45,4 +56,10 @@ func loggerMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
         log.Printf("Outgoing Response: %d %s", c.Response().Status, http.StatusText(c.Response().Status))
         return nil
     }
+}
+
+func Render(ctx echo.Context, statusCode int, t templ.Component) error {
+	ctx.Response().Writer.WriteHeader(statusCode)
+	ctx.Response().Header().Set(echo.HeaderContentType, echo.MIMETextHTML)
+	return t.Render(ctx.Request().Context(), ctx.Response().Writer)
 }
