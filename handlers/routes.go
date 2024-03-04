@@ -13,9 +13,10 @@ var (
     isError bool = false
 )
 
-func SetupRoutes(e *echo.Echo) {
+func SetupRoutes(e *echo.Echo, h *AuthHandler) {
     //component := auth_views.HomeIndex()
     //e.GET("/", Render(e.AcquireContext().Request(), http.StatusOK, component))
+    e.GET("/", h.homeHandler)
 }
 
 // This custom Render replaces Echo's echo.Context.Render() with templ's templ.Component.Render().

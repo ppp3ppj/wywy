@@ -8,12 +8,13 @@ import (
 	"github.com/a-h/templ"
 	"github.com/ppp3ppj/wywy/config"
 	"github.com/ppp3ppj/wywy/db"
+	"github.com/ppp3ppj/wywy/handlers"
 	"github.com/ppp3ppj/wywy/services"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+
 	//	"github.com/labstack/echo/v4/middleware"
-	"github.com/ppp3ppj/wywy/views/auth_views"
 )
 
 func envPath() string {
@@ -36,10 +37,9 @@ func main() {
     us := services.NewUserService(services.User{}, db)
     _ = us
 
-    e.GET("/", func(c echo.Context) error {
-        component := auth_views.HomeIndex()
-        return Render(c, http.StatusOK, component)
-    })
+    ah := handlers.NewAuthHandler()
+    handlers.SetupRoutes(e, ah)
+
 
     e.Logger.Fatal(e.Start(":1323"))
 
