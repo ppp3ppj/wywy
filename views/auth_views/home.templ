@@ -24,7 +24,7 @@ templ Home() {
 }
 
 templ HomeIndex(cmp templ.Component) {
-    @layout.Base() {
+    @layout.Base(true) {
         @cmp
     }
 }

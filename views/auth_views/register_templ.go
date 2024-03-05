@@ -12,7 +12,7 @@ import "bytes"
 
 import "github.com/ppp3ppj/wywy/views/layout"
 
-func Home() templ.Component {
+func Register() templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -25,7 +25,7 @@ func Home() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Hero --><section class=\"container mx-auto mt-12 mb-4\"><div class=\"hero min-h-[30rem] bg-base-200 rounded\"><div class=\"hero-content text-center\"><div class=\"max-w-4xl\"><h1 class=\"text-6xl md:text-6xl lg:text-8xl font-bold\">Hello There</h1><p class=\"py-6 text-2xl md:text-3xl\">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi aliquid quo repudiandae asperiores nemo omnis sit facere, qui veniam vel.</p><button class=\"btn btn-primary me-2\">Get Started!</button> <button class=\"btn btn-secondary\">Do Something Else!</button> <button class=\"btn btn-primary me-2\" data-toggle-theme=\"dark,light\" data-act-class=\"ACTIVECLASS\">Change Theme</button></div></div></div></section>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div>Sign up</div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -36,7 +36,7 @@ func Home() templ.Component {
 	})
 }
 
-func HomeIndex(cmp templ.Component) templ.Component {
+func RegisterIndex(cmp templ.Component) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -64,7 +64,7 @@ func HomeIndex(cmp templ.Component) templ.Component {
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = layout.Base(true).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layout.Base(false).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

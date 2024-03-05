@@ -1,0 +1,14 @@
+package auth_views
+
+import "github.com/ppp3ppj/wywy/views/layout"
+
+templ Register() {
+<div>Sign up</div>
+}
+
+templ RegisterIndex(cmp templ.Component) {
+    @layout.Base(false) {
+        @cmp
+    }
+}
+

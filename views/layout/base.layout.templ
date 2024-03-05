@@ -1,6 +1,8 @@
 package layout
 
-templ Base() {
+import "github.com/ppp3ppj/wywy/views/partials"
+
+templ Base(isNav bool) {
 <!DOCTYPE html>
 	<html lang="en" data-theme="dark">
 		<head>
@@ -19,66 +21,9 @@ templ Base() {
             <script type="text/javascript" src="theme_change2.0.2.js"></script>
 		</head>
 		<body>
-        if true {
+        if isNav {
             <header>
-                <!-- Navbar -->
-                <div class="navbar bg-base-200">
-                  <div class="navbar-start">
-                    <div class="dropdown">
-                      <label tabindex="0" class="btn btn-ghost lg:hidden">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M4 6h16M4 12h8m-8 6h16"
-                          />
-                        </svg>
-                      </label>
-                      <ul
-                        tabindex="0"
-                        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-                      >
-                        <li><a>About</a></li>
-                        <li><a>Products</a></li>
-                        <li><a>Contact</a></li>
-                      </ul>
-                    </div>
-                    <a class="btn btn-ghost normal-case text-xl">Logo Heading</a>
-                  </div>
-                  <div class="navbar-center hidden lg:flex">
-                    <ul class="menu menu-horizontal px-1">
-                      <li><a>About</a></li>
-                      <li><a>Products</a></li>
-                      <li><a>Contact</a></li>
-                    </ul>
-                  </div>
-                  <div class="navbar-end">
-                    <button class="btn btn-accent"
-                        hx-swap="none"
-                        hx-target="#htmx_modal"
-                        hx-on:click="daisy_modal.showModal()">Login</button>
-                  </div>
-                </div>
-
-                <dialog id="daisy_modal" class="modal modal-bottom sm:modal-middle">
-                  <div class="modal-box" id="htmx_modal">
-                    <h3 class="font-bold text-lg">Hello!</h3>
-                    <p class="py-4">Press ESC key or click the button below to close</p>
-                    <div class="modal-action">
-                      <form method="dialog">
-                        <!-- if there is a button in form, it will close the modal -->
-                        <button class="btn">Close</button>
-                      </form>
-                    </div>
-                  </div>
-                </dialog>
+                @partials.Navbar()
             </header>
         }
             <main >

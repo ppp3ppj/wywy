@@ -5,7 +5,6 @@ import (
 
 	"github.com/a-h/templ"
 	"github.com/labstack/echo/v4"
-//	"github.com/ppp3ppj/wywy/views/auth_views"
 )
 
 var (
@@ -14,9 +13,9 @@ var (
 )
 
 func SetupRoutes(e *echo.Echo, h *AuthHandler) {
-    //component := auth_views.HomeIndex()
-    //e.GET("/", Render(e.AcquireContext().Request(), http.StatusOK, component))
     e.GET("/", h.homeHandler)
+    e.GET("/login", h.loginHandler)
+    e.GET("/register", h.registerHandler)
 }
 
 // This custom Render replaces Echo's echo.Context.Render() with templ's templ.Component.Render().
