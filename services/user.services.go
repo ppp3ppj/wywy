@@ -10,7 +10,7 @@ import (
 )
 
 type User struct {
-    Id int 
+    Id string 
     Email string
     Password string
     Username string 

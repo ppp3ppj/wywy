@@ -10,9 +10,9 @@ CREATE SEQUENCE users_id_seq START WITH 1 INCREMENT BY 1;
 
 CREATE TABLE "users" (
   "id" varchar(8) PRIMARY KEY DEFAULT CONCAT('U', LPAD(nextval('users_id_seq')::text, 7, '0')),
-  "username" varchar,
-  "password" varchar,
-  "email" varchar,
+  "username" varchar UNIQUE NOT NULL,
+  "password" varchar NOT NULL,
+  "email" varchar UNIQUE,
   "first_name" varchar,
   "last_name" varchar,
   "date_registered" TIMESTAMP NOT NULL DEFAULT NOW(),
