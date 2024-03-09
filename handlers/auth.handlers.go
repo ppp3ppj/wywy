@@ -1,17 +1,21 @@
 package handlers
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/a-h/templ"
 	"github.com/labstack/echo/v4"
 	"github.com/ppp3ppj/wywy/services"
 	"github.com/ppp3ppj/wywy/views/auth_views"
+	"github.com/ppp3ppj/wywy/views/auth_views/register_components"
 )
 
 type AuthService interface {
     CreateUser(user services.User) error
+    ValidateEmail(email string) error
 }
 
 func NewAuthHandler(us AuthService) *AuthHandler {
@@ -53,14 +57,37 @@ func (h *AuthHandler) registerHandler(c echo.Context) error {
         }
         err := h.UserService.CreateUser(user)
         if err != nil {
+            if strings.Contains(err.Error(), "username has been used") {
+                err = errors.New("Username has been used")
+
+                return c.Redirect(http.StatusSeeOther, "/register")
+            }
+            /*
             return echo.NewHTTPError(
                 echo.ErrInternalServerError.Code,
                 fmt.Sprintf("Failed to create user: %v", err),
             )
+            */
         }
         return c.Redirect(http.StatusSeeOther, "/login")
     }
     return renderView(c, auth_views.RegisterIndex(registerView))
+}
+
+func (h *AuthHandler) registerEmailHandler(c echo.Context) error {
+    email := c.FormValue("email")
+    fmt.Println("email is ", email)
+    if c.Request().Method == "POST" {
+        fmt.Println("POST RegisterEmailHandler", email)
+        result := h.UserService.ValidateEmail(email)
+        if strings.Contains(result.Error(), "email has been used") {
+            fmt.Println("result email is ", email, " has been used")
+            return renderView(c, register_components.EmailInlineValidation("ppp"))
+        }
+
+        return renderView(c, register_components.EmailInlineValidation(email))
+    }
+    return nil
 }
 
 func renderView(c echo.Context, cmp templ.Component) error {

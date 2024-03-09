@@ -54,3 +54,14 @@ func (us *UserService) CreateUser(u User) error {
     }
     return err 
 }
+
+func (us *UserService) ValidateEmail(email string) error {
+    ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+    defer cancel()
+    query := `SELECT email FROM users WHERE email = $1`
+    var e string
+    if err := us.Db.QueryRowContext(ctx, query, email).Scan(&e); err != nil {
+        return fmt.Errorf("email found")
+    }
+    return fmt.Errorf("email not found")
+}

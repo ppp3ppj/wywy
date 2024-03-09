@@ -17,11 +17,15 @@ templ Register() {
                         name="fullname"
                         placeholder="Full Name" />
 
+                <div hx-target="this" hx-swap="outerHTML">
                     <input 
+                        id="email"
+                        hx-post="/register/email"
                         type="text"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
                         name="email"
                         placeholder="Email" />
+                </div>
 
                     <input 
                         type="password"

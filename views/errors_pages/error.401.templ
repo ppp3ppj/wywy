@@ -1,0 +1,16 @@
+package errors_pages
+
+import "github.com/ppp3ppj/wywy/views/layout"
+
+templ Error401() {
+
+}
+
+templ ErorrIndex(
+    isError bool,
+    cmp templ.Component,
+    ) {
+    @layout.Base(false) {
+        @cmp
+    }
+}
