@@ -39,8 +39,12 @@ func (h *AuthHandler) loginHandler(c echo.Context) error {
 }
 
 func (h *AuthHandler) registerHandler(c echo.Context) error {
-    registerView := auth_views.Register()
 
+    emailInput := register_components.EmailInlineValidation(false, "")
+
+    var registerComponents = []templ.Component;
+
+    registerView := auth_views.Register()
     if c.Request().Method == "POST" {
         fmt.Println("POST")
         /*
@@ -75,16 +79,13 @@ func (h *AuthHandler) registerHandler(c echo.Context) error {
 }
 
 func (h *AuthHandler) registerEmailHandler(c echo.Context) error {
+    email := c.FormValue("email")
 
+    if email == "" {
+        fmt.Println("email is empty")
+    }
 
     if c.Request().Method == "POST" {
-
-    email := c.FormValue("email")
-    fmt.Println("POST RegisterEmailHandler ppp-agent", email)
-    if len(strings.TrimSpace(email)) == 0 {
-        fmt.Println("email is empty by ppppppp")
-        return renderView(c, register_components.EmailInlineValidation(false ,email))
-    }
         fmt.Println("POST RegisterEmailHandler", email)
         result := h.UserService.ValidateEmail(email)
         fmt.Println("result is ", result)

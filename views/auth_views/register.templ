@@ -17,14 +17,31 @@ templ Register() {
                         name="fullname"
                         placeholder="Full Name" />
 
+                <div>
+                    <input type="text" placeholder="Type here" class="input input-bordered input-primary w-full max-w-xs" />
+                </div>
+
+<!--
                 <div hx-target="this" hx-swap="outerHTML">
                     <input 
                         id="email"
+                        name="email"
                         hx-post="/register/email"
                         type="text"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
-                        name="email"
                         placeholder="Email" />
+                </div>
+-->
+
+                <div hx-target="this" hx-swap="outerHTML">
+                    <input 
+                        id="email"
+                        name="email"
+                        hx-post="/register/email"
+                        type="text"
+                        placeholder="Email"
+                        placeholder="Type here" 
+                        class="input input-bordered input-primary w-full max-w-xs p-4" />
                 </div>
 
                     <input 
