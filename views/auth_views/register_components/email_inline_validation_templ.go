@@ -26,7 +26,7 @@ func EmailInlineValidation(isValidated bool, email string) templ.Component {
 		}
 		ctx = templ.ClearChildren(ctx)
 		if isValidated {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div hx-target=\"this\" hx-swap=\"outerHTML\"><label class=\"form-control w-full max-w-xs\"><div class=\"label\"><span class=\"label-text-alt\">This Email is used.</span></div><input id=\"email\" name=\"email\" hx-post=\"/register/email\" type=\"text\" placeholder=\"Email\" value=\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div hx-target=\"this\" hx-swap=\"outerHTML\" class=\"mb-3\"><label class=\"form-control w-full max-w-xs\"><div class=\"label\"><span class=\"label-text-alt\">This Email is used.</span></div><input id=\"email\" name=\"email\" hx-post=\"/register/email\" type=\"text\" placeholder=\"Email\" value=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -34,13 +34,13 @@ func EmailInlineValidation(isValidated bool, email string) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" placeholder=\"Type here\" class=\"input input-bordered input-error w-full max-w-xs p-4\"></label></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" placeholder=\"Type here\" class=\"input input-bordered input-error w-full max-w-xs\"></label></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		} else {
 			if len(strings.TrimSpace(email)) == 0 {
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div hx-target=\"this\" hx-swap=\"outerHTML\"><input id=\"email\" name=\"email\" hx-post=\"/register/email\" type=\"text\" placeholder=\"Email\" value=\"")
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div hx-target=\"this\" hx-swap=\"outerHTML\" class=\"mb-3\"><input id=\"email\" name=\"email\" hx-post=\"/register/email\" type=\"text\" placeholder=\"Email\" value=\"")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -48,12 +48,12 @@ func EmailInlineValidation(isValidated bool, email string) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" placeholder=\"Type here\" class=\"input input-bordered input-primary w-full max-w-xs p-4\"></div>")
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" placeholder=\"Type here\" class=\"input input-bordered input-primary w-full max-w-xs\"></div>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 			} else {
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div hx-target=\"this\" hx-swap=\"outerHTML\"><label class=\"form-control w-full max-w-xs\"><div class=\"label\"><span class=\"label-text-alt\">This Email is not use.</span></div><input id=\"email\" name=\"email\" hx-post=\"/register/email\" type=\"text\" placeholder=\"Email\" value=\"")
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div hx-target=\"this\" hx-swap=\"outerHTML\" class=\"mb-3\"><label class=\"form-control w-full max-w-xs\"><div class=\"label\"><span class=\"label-text-alt\">This Email is not use.</span></div><input id=\"email\" name=\"email\" hx-post=\"/register/email\" type=\"text\" placeholder=\"Email\" value=\"")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -61,7 +61,7 @@ func EmailInlineValidation(isValidated bool, email string) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" placeholder=\"Type here\" class=\"input input-bordered input-accent w-full max-w-xs p-4\"></label></div>")
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" placeholder=\"Type here\" class=\"input input-bordered input-accent w-full max-w-xs\"></label></div>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

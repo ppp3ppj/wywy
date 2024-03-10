@@ -14,6 +14,8 @@ type User struct {
     Email string
     Password string
     Username string 
+    Firstname string
+    Lastname string
 }
 
 type UserService struct {

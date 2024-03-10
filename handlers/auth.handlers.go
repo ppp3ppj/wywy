@@ -51,10 +51,13 @@ func (h *AuthHandler) registerHandler(c echo.Context) error {
         }
         */
         user := services.User {
-            Email: "test@wywy.com",
-            Password: "test3412",
-            Username: "test11Agent",
+            Email: c.FormValue("email"),
+            Password: c.FormValue("password"),
+            Username: c.FormValue("username"),
+            Firstname: c.FormValue("firstname"),
+            Lastname: c.FormValue("lastname"),
         }
+
         err := h.UserService.CreateUser(user)
         if err != nil {
             if strings.Contains(err.Error(), "username has been used") {
@@ -75,21 +78,13 @@ func (h *AuthHandler) registerHandler(c echo.Context) error {
 }
 
 func (h *AuthHandler) registerEmailHandler(c echo.Context) error {
-
-
-    if c.Request().Method == "POST" {
-
     email := c.FormValue("email")
-    fmt.Println("POST RegisterEmailHandler ppp-agent", email)
-    if len(strings.TrimSpace(email)) == 0 {
-        fmt.Println("email is empty by ppppppp")
-        return renderView(c, register_components.EmailInlineValidation(false ,email))
-    }
-        fmt.Println("POST RegisterEmailHandler", email)
+    if c.Request().Method == "POST" {
+        if len(strings.TrimSpace(email)) == 0 {
+            return renderView(c, register_components.EmailInlineValidation(false ,email))
+        }
         result := h.UserService.ValidateEmail(email)
-        fmt.Println("result is ", result)
         if strings.Contains(result.Error(), "email found") {
-            fmt.Println("email found", email)
             return renderView(c, register_components.EmailInlineValidation(false ,email))
         }
         return renderView(c, register_components.EmailInlineValidation(true, email))
