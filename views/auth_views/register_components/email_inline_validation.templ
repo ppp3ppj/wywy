@@ -1,0 +1,55 @@
+package register_components
+
+import "strings"
+
+templ EmailInlineValidation(isValidated bool, email string) {
+    if isValidated {
+        <div hx-target="this" hx-swap="outerHTML" class="mb-3">
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text-alt">This Email is used.</span>
+              </div>
+                <input 
+                    id="email"
+                    name="email"
+                    hx-post="/register/email"
+                    type="text"
+                    placeholder="Email"
+                    value={ email }
+                    placeholder="Type here" 
+                    class="input input-bordered input-error w-full max-w-xs" />
+            </label>
+        </div> 
+    } else {
+        if len(strings.TrimSpace(email)) == 0 {
+            <div hx-target="this" hx-swap="outerHTML" class="mb-3">
+                    <input 
+                        id="email"
+                        name="email"
+                        hx-post="/register/email"
+                        type="text"
+                        placeholder="Email"
+                        value={ email }
+                        placeholder="Type here" 
+                        class="input input-bordered input-primary w-full max-w-xs" />
+            </div> 
+        } else {
+            <div hx-target="this" hx-swap="outerHTML" class="mb-3">
+                <label class="form-control w-full max-w-xs">
+                  <div class="label">
+                    <span class="label-text-alt">This Email is not use.</span>
+                  </div>
+                    <input 
+                        id="email"
+                        name="email"
+                        hx-post="/register/email"
+                        type="text"
+                        placeholder="Email"
+                        value={ email }
+                        placeholder="Type here" 
+                        class="input input-bordered input-accent w-full max-w-xs" />
+                </label>
+            </div> 
+        }
+    }
+}

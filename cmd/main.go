@@ -12,7 +12,7 @@ import (
 	"github.com/ppp3ppj/wywy/services"
 
 	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+//	"github.com/labstack/echo/v4/middleware"
 
 	//	"github.com/labstack/echo/v4/middleware"
 )
@@ -29,15 +29,15 @@ func main() {
     e := echo.New()
     //e.Static("/", "assets")
     e.Static("/", "public")
-    //  e.Use(loggerMiddleware)
-    e.Use(middleware.Logger())
+      e.Use(loggerMiddleware)
+   // e.Use(middleware.Logger())
     cfg := config.LoadConfig(envPath())
     db := db.DbConnect(cfg.Db())
 
     us := services.NewUserService(services.User{}, db)
     _ = us
 
-    ah := handlers.NewAuthHandler()
+    ah := handlers.NewAuthHandler(us)
     handlers.SetupRoutes(e, ah)
 
 

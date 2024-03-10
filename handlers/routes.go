@@ -16,6 +16,11 @@ func SetupRoutes(e *echo.Echo, h *AuthHandler) {
     e.GET("/", h.homeHandler)
     e.GET("/login", h.loginHandler)
     e.GET("/register", h.registerHandler)
+    e.POST("/register", h.registerHandler)
+
+    registerGroup := e.Group("/register")
+    registerGroup.POST("/email", h.registerEmailHandler)
+
 }
 
 // This custom Render replaces Echo's echo.Context.Render() with templ's templ.Component.Render().

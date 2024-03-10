@@ -6,35 +6,71 @@ templ Register() {
 <div class="bg-grey-lighter min-h-screen flex flex-col">
             <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
                 <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-                    <h1 class="mb-8 text-3xl text-center">Sign up</h1>
-                    <input 
-                        type="text"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
-                        name="fullname"
-                        placeholder="Full Name" />
+                <h1 class="mb-8 text-3xl text-center">Sign up</h1>
+                    <form
+                        hx-swap="transition:true"
+                        hx-post="/register"
+                    >
 
+                <div class="mb-3">
                     <input 
-                        type="text"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        id="firstname"
+                        name="firstname"
+                        type="text" 
+                        placeholder="Firstname" 
+                        class="input input-bordered input-primary w-full max-w-xs" />
+                </div>
+
+
+                <div class="mb-3">
+                    <input 
+                        id="lastname"
+                        name="lastname"
+                        type="text" 
+                        placeholder="Lastname" 
+                        class="input input-bordered input-primary w-full max-w-xs" />
+                </div>
+
+                <div class="mb-3">
+                    <input 
+                        id="username"
+                        name="username"
+                        type="text" 
+                        placeholder="Username" 
+                        class="input input-bordered input-primary w-full max-w-xs" />
+                </div>
+
+                <div hx-target="this" hx-swap="outerHTML" class="mb-3">
+                    <input 
+                        id="email"
                         name="email"
-                        placeholder="Email" />
+                        hx-post="/register/email"
+                        type="text"
+                        placeholder="Email"
+                        placeholder="Type here" 
+                        class="input input-bordered input-primary w-full max-w-xs p-4" />
+                </div>
 
+                <div class="mb-3">
                     <input 
-                        type="password"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        id="password"
                         name="password"
-                        placeholder="Password" />
-                    <input 
-                        type="password"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        type="password" 
+                        placeholder="Password"
+                        class="input input-bordered input-primary w-full max-w-xs" />
+                </div>
+                <div class="mb-3">
+                    <input
+                        id="confirm_password"
                         name="confirm_password"
-                        placeholder="Confirm Password" />
+                        type="password"
+                        placeholder="Confirm Password"
+                        class="input input-bordered input-primary w-full max-w-xs" />
+                </div>
 
-                    <button
-                        type="submit"
-                        class="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1"
-                    >Create Account</button>
+                <button class="btn btn-active btn-accent w-full">Create</button>
 
+                </form>
                     <div class="text-center text-sm text-grey-dark mt-4">
                         By signing up, you agree to the 
                         <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
