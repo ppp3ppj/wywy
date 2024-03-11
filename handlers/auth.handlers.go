@@ -7,11 +7,21 @@ import (
 	"strings"
 
 	"github.com/a-h/templ"
+	"github.com/gorilla/sessions"
+	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
 	"github.com/ppp3ppj/wywy/services"
 	"github.com/ppp3ppj/wywy/views/auth_views"
 	"github.com/ppp3ppj/wywy/views/auth_views/register_components"
 	"golang.org/x/crypto/bcrypt"
+)
+
+const (
+    auth_sessios_key string = "authenticate-sessions"
+    auth_key string = "authenticated"
+    user_id_key string = "user_id"
+    username_key string = "username"
+    tz_key string = "time_zone"
 )
 
 type AuthService interface {
@@ -39,6 +49,11 @@ func (h *AuthHandler) loginHandler(c echo.Context) error {
     loginView := auth_views.Login()
 
     if c.Request().Method == "POST" {
+        // obtaining the time zone from POST Request
+        tzone := ""
+        if len(c.Request().Header["X-Timezone"]) != 0 {
+            tzone = c.Request().Header["X-Timezone"][0]
+        }
         email := c.FormValue("email")
         //password := c.FormValue("password")
         user, err := h.UserService.CheckEmail(email)
@@ -63,6 +78,23 @@ func (h *AuthHandler) loginHandler(c echo.Context) error {
         }
 
         // Get Session and seitting Cookies
+        sess, _ := session.Get(auth_sessios_key, c)
+        sess.Options = &sessions.Options{
+            Path: "/",
+            MaxAge: 3600, // in seconds
+            HttpOnly: true,
+        }
+
+        // Set user as authenticated
+
+        fmt.Println("tz_key is ", tzone)
+        sess.Values = map[interface{}]interface{}{
+            auth_key: true,
+            user_id_key: user.Id,
+            username_key: user.Username,
+            tz_key: tzone,
+        }
+        sess.Save(c.Request(), c.Response())
 
         return c.Redirect(http.StatusSeeOther, "/")
     }
