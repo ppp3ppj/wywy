@@ -37,13 +37,15 @@ func (us *UserService) CreateUser(u User) error {
     if err != nil {
         return err
     }
-    query := `INSERT INTO users (email, password, username) VALUES ($1, $2, $3) RETURNING "id"`
+    query := `INSERT INTO users (email, password, username, first_name, last_name) VALUES ($1, $2, $3, $4, $5) RETURNING "id"`
     if err := us.Db.QueryRowContext(
         ctx,
         query,
         u.Email,
         string(hashPassword),
         u.Username,
+        u.Firstname,
+        u.Lastname,
     ).Scan(&u.Id); err != nil { 
       switch err.Error() {
             case "ERROR: duplicate key value violates unique constraint \"users_username_key\" (SQLSTATE 23505)":
