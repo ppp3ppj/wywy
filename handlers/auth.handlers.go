@@ -11,11 +11,13 @@ import (
 	"github.com/ppp3ppj/wywy/services"
 	"github.com/ppp3ppj/wywy/views/auth_views"
 	"github.com/ppp3ppj/wywy/views/auth_views/register_components"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type AuthService interface {
     CreateUser(user services.User) error
     ValidateEmail(email string) error
+    CheckEmail(email string) (services.User, error)
 }
 
 func NewAuthHandler(us AuthService) *AuthHandler {
@@ -35,6 +37,35 @@ func (h *AuthHandler) homeHandler(c echo.Context) error {
 
 func (h *AuthHandler) loginHandler(c echo.Context) error {
     loginView := auth_views.Login()
+
+    if c.Request().Method == "POST" {
+        email := c.FormValue("email")
+        //password := c.FormValue("password")
+        user, err := h.UserService.CheckEmail(email)
+        fmt.Println("user is ", user)
+        if err != nil {
+            if strings.Contains(err.Error(), "email not found") {
+                return c.Redirect(http.StatusSeeOther, "/login")
+            }
+            return echo.NewHTTPError(
+                echo.ErrInternalServerError.Code,
+                fmt.Sprintf("Failed to check email: %v", err),
+            )
+        }
+
+        err = bcrypt.CompareHashAndPassword(
+            []byte(user.Password), 
+            []byte(c.FormValue("password")),
+        )
+
+        if err != nil {
+            return c.Redirect(http.StatusSeeOther, "/login")
+        }
+
+        // Get Session and seitting Cookies
+
+        return c.Redirect(http.StatusSeeOther, "/")
+    }
     return renderView(c, auth_views.LoginIndex(loginView))
 }
 
