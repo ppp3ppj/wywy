@@ -47,10 +47,12 @@ func main() {
     db := db.DbConnect(cfg.Db())
 
     us := services.NewUserService(services.User{}, db)
-    _ = us
-
     ah := handlers.NewAuthHandler(us)
-    handlers.SetupRoutes(e, ah)
+
+    ds := services.NewDashboardService()
+    dh := handlers.NewDashboardHandler(ds)
+    
+    handlers.SetupRoutes(e, ah, dh)
 
 
     e.Logger.Fatal(e.Start(":1323"))

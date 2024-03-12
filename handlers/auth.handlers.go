@@ -96,7 +96,7 @@ func (h *AuthHandler) loginHandler(c echo.Context) error {
         }
         sess.Save(c.Request(), c.Response())
 
-        return c.Redirect(http.StatusSeeOther, "/")
+        return c.Redirect(http.StatusSeeOther, "/dashboard/")
     }
     return renderView(c, auth_views.LoginIndex(loginView))
 }
@@ -153,6 +153,29 @@ func (h *AuthHandler) registerEmailHandler(c echo.Context) error {
         return renderView(c, register_components.EmailInlineValidation(true, email))
     }
     return nil
+}
+
+func (h *AuthHandler) authMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+    return func(c echo.Context) error {
+        sess, _ := session.Get(auth_sessios_key, c)
+        if auth, ok := sess.Values[auth_key].(bool); !ok || !auth {
+            return echo.NewHTTPError(echo.ErrUnauthorized.Code, "Please provide valid credentials")
+        }
+
+        if userId, ok := sess.Values[user_id_key].(string); !ok || len(userId) == 0 {
+            c.Set(user_id_key, userId)
+        }
+
+        if username, ok := sess.Values[username_key].(string); !ok || len(username) == 0 {
+            c.Set(username_key, username)
+        }
+
+        if tz, ok := sess.Values[tz_key].(string); !ok || len(tz) == 0 {
+            c.Set(tz_key, tz)
+        }
+
+        return next(c)
+    }
 }
 
 func renderView(c echo.Context, cmp templ.Component) error {

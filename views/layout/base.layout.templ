@@ -24,20 +24,21 @@ templ Base(isNav bool) {
 			<script type="text/javascript" src="htmx.min.js"></script>
             <script type="text/javascript" src="theme_change2.0.2.js"></script>
 
+            <link
+              href="https://cdn.jsdelivr.net/npm/daisyui@3.5.1/dist/full.css"
+              rel="stylesheet"
+              type="text/css"
+            />
 
-
-            <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.3/dist/full.min.css" rel="stylesheet" type="text/css" />
             <script src="https://cdn.tailwindcss.com"></script>
-
-
 		</head>
-		<body>
+		<body hx-boost="true">
         if isNav {
             <header>
                 @partials.Navbar()
             </header>
         }
-            <main >
+            <main class{ templ.KV("pt-40") }>
                 { children... }
             </main>
 		</body>
