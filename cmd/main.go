@@ -1,19 +1,22 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
 
 	"github.com/a-h/templ"
+	"github.com/gorilla/sessions"
 	"github.com/ppp3ppj/wywy/config"
 	"github.com/ppp3ppj/wywy/db"
 	"github.com/ppp3ppj/wywy/handlers"
 	"github.com/ppp3ppj/wywy/services"
 
+	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
-//	"github.com/labstack/echo/v4/middleware"
-
+	"github.com/labstack/echo/v4/middleware"
+	//	"github.com/labstack/echo/v4/middleware"
 	//	"github.com/labstack/echo/v4/middleware"
 )
 
@@ -29,16 +32,27 @@ func main() {
     e := echo.New()
     //e.Static("/", "assets")
     e.Static("/", "public")
-      e.Use(loggerMiddleware)
-   // e.Use(middleware.Logger())
+    e.Use(loggerMiddleware)
+
+    // Cors Middleware
+    e.Use(middleware.CORSWithConfig(middleware.DefaultCORSConfig))
+
+    // e.Use(middleware.Logger())
     cfg := config.LoadConfig(envPath())
+
+    // Session middleware
+    // Secret Key is JWT_ADMIN_KEY at env.dev
+    fmt.Println("Secret Key: ", cfg.Jwt().SecretKey())
+    e.Use(session.Middleware(sessions.NewCookieStore([]byte(cfg.Jwt().SecretKey()))))
     db := db.DbConnect(cfg.Db())
 
     us := services.NewUserService(services.User{}, db)
-    _ = us
-
     ah := handlers.NewAuthHandler(us)
-    handlers.SetupRoutes(e, ah)
+
+    ds := services.NewDashboardService()
+    dh := handlers.NewDashboardHandler(ds)
+    
+    handlers.SetupRoutes(e, ah, dh)
 
 
     e.Logger.Fatal(e.Start(":1323"))

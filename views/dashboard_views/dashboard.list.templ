@@ -1,0 +1,12 @@
+package dashboard_views
+
+import "github.com/ppp3ppj/wywy/views/layout"
+
+templ DashboardList() {
+    <div>Hi!!! - Dashboard</div>
+}
+templ DashboardIndex(cmp templ.Component) {
+    @layout.Base(true) {
+        @cmp
+    }
+}
