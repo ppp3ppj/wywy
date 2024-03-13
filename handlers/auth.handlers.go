@@ -97,6 +97,7 @@ func (h *AuthHandler) loginHandler(c echo.Context) error {
         sess.Save(c.Request(), c.Response())
 
         return c.Redirect(http.StatusSeeOther, "/dashboard/")
+    //return renderView(c, dashboard_views.DashboardIndex(dashboard_views.DashboardList()))
     }
     return renderView(c, auth_views.LoginIndex(loginView))
 }
@@ -177,6 +178,24 @@ func (h *AuthHandler) authMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
         return next(c)
     }
 }
+
+func (h *AuthHandler) logoutHandler(c echo.Context) error {
+    sess, _ := session.Get(auth_sessios_key, c)
+    // Revoke users authenticate-session
+    sess.Values = map[interface{}]interface{}{
+        auth_key: false,
+        user_id_key: "",
+        username_key: "",
+        tz_key: "",
+    }
+
+    sess.Save(c.Request(), c.Response())
+
+    return c.Redirect(http.StatusSeeOther, "/login")
+}
+
+
+
 
 func renderView(c echo.Context, cmp templ.Component) error {
 	c.Response().Header().Set(echo.HeaderContentType, echo.MIMETextHTML)

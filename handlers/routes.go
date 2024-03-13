@@ -18,6 +18,7 @@ func SetupRoutes(e *echo.Echo, h *AuthHandler, dh *DashboardHandler) {
     e.GET("/register", h.registerHandler)
     e.POST("/register", h.registerHandler)
     e.POST("/login", h.loginHandler)
+    e.POST("/logout", h.logoutHandler)
 
     registerGroup := e.Group("/register")
     registerGroup.POST("/email", h.registerEmailHandler)

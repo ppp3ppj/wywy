@@ -19,10 +19,12 @@ templ Base(isNav bool) {
             -->
 			<link rel="shortcut icon" href="icon.png" type="image/png"/>
 
+            <!--
 			<link rel="stylesheet" type="text/css" href="tailwind.css"/>
 
-			<script type="text/javascript" src="htmx.min.js"></script>
-            <script type="text/javascript" src="theme_change2.0.2.js"></script>
+                <script type="text/javascript" src="htmx.min.js"></script>
+                <script type="text/javascript" src="theme_change2.0.2.js"></script>
+            -->
 
             <link
               href="https://cdn.jsdelivr.net/npm/daisyui@3.5.1/dist/full.css"
@@ -31,14 +33,17 @@ templ Base(isNav bool) {
             />
 
             <script src="https://cdn.tailwindcss.com"></script>
+            <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+            <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+
 		</head>
 		<body hx-boost="true">
-        if isNav {
-            <header>
-                @partials.Navbar()
-            </header>
-        }
-            <main class{ templ.KV("pt-40") }>
+            if isNav {
+                <header>
+                    @partials.Navbar()
+                </header>
+            }
+            <main>
                 { children... }
             </main>
 		</body>
