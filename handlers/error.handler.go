@@ -25,6 +25,8 @@ func CustomHTTPErrorHandler(err error, c echo.Context) {
     isError = true
 
     renderView(c, errors_pages.ErorrIndex(
+        "",
+        fromProtected,
         isError,
         errorPage(false),
     ))

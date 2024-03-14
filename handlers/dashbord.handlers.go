@@ -19,5 +19,9 @@ func NewDashboardHandler(ds DashboardService) *DashboardHandler {
 }
 
 func (h *DashboardHandler) dashboardListHandler(c echo.Context) error {
-    return renderView(c, dashboard_views.DashboardIndex(dashboard_views.DashboardList()))
+    return renderView(c, dashboard_views.DashboardIndex(
+        "",
+        fromProtected,
+        dashboard_views.DashboardList(),
+    ))
 }

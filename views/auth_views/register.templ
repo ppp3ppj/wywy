@@ -92,8 +92,8 @@ templ Register() {
 </div>
 }
 
-templ RegisterIndex(cmp templ.Component) {
-    @layout.Base(false) {
+templ RegisterIndex(username string, fromProtected bool, cmp templ.Component) {
+    @layout.Base(username, fromProtected, false) {
         @cmp
     }
 }

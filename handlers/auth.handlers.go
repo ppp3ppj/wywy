@@ -42,7 +42,11 @@ type AuthHandler struct {
 
 func (h *AuthHandler) homeHandler(c echo.Context) error {
     homeView := auth_views.Home()
-    return renderView(c, auth_views.HomeIndex(homeView))
+    return renderView(c, auth_views.HomeIndex(
+        "",
+        fromProtected,
+        homeView,
+    ))
 }
 
 func (h *AuthHandler) loginHandler(c echo.Context) error {
@@ -99,7 +103,11 @@ func (h *AuthHandler) loginHandler(c echo.Context) error {
         return c.Redirect(http.StatusSeeOther, "/dashboard/")
     //return renderView(c, dashboard_views.DashboardIndex(dashboard_views.DashboardList()))
     }
-    return renderView(c, auth_views.LoginIndex(loginView))
+    return renderView(c, auth_views.LoginIndex(
+        "",
+        fromProtected,
+        loginView,
+    ))
 }
 
 func (h *AuthHandler) registerHandler(c echo.Context) error {
@@ -138,7 +146,11 @@ func (h *AuthHandler) registerHandler(c echo.Context) error {
         }
         return c.Redirect(http.StatusSeeOther, "/login")
     }
-    return renderView(c, auth_views.RegisterIndex(registerView))
+    return renderView(c, auth_views.RegisterIndex(
+        "",
+        fromProtected,
+        registerView,
+    ))
 }
 
 func (h *AuthHandler) registerEmailHandler(c echo.Context) error {
@@ -160,6 +172,8 @@ func (h *AuthHandler) authMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
     return func(c echo.Context) error {
         sess, _ := session.Get(auth_sessios_key, c)
         if auth, ok := sess.Values[auth_key].(bool); !ok || !auth {
+
+            fromProtected = false
             return echo.NewHTTPError(echo.ErrUnauthorized.Code, "Please provide valid credentials")
         }
 
@@ -174,6 +188,8 @@ func (h *AuthHandler) authMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
         if tz, ok := sess.Values[tz_key].(string); !ok || len(tz) == 0 {
             c.Set(tz_key, tz)
         }
+
+        fromProtected = true
 
         return next(c)
     }
@@ -191,11 +207,10 @@ func (h *AuthHandler) logoutHandler(c echo.Context) error {
 
     sess.Save(c.Request(), c.Response())
 
+    fromProtected = false
+
     return c.Redirect(http.StatusSeeOther, "/login")
 }
-
-
-
 
 func renderView(c echo.Context, cmp templ.Component) error {
 	c.Response().Header().Set(echo.HeaderContentType, echo.MIMETextHTML)

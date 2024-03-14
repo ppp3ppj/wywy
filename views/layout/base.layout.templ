@@ -2,7 +2,7 @@ package layout
 
 import "github.com/ppp3ppj/wywy/views/partials"
 
-templ Base(isNav bool) {
+templ Base(username string, fromProtected bool, isNav bool) {
 <!DOCTYPE html>
 	<html lang="en" data-theme="dark">
 		<head>
@@ -43,7 +43,7 @@ templ Base(isNav bool) {
 		<body hx-boost="true">
             if isNav {
                 <header>
-                    @partials.Navbar()
+                    @partials.Navbar(username, fromProtected)
                 </header>
             }
             <main>
