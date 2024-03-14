@@ -23,8 +23,8 @@ templ Home() {
 </section>
 }
 
-templ HomeIndex(cmp templ.Component) {
-    @layout.Base(true) {
+templ HomeIndex(username string, fromProtected bool, cmp templ.Component) {
+    @layout.Base(username, fromProtected, true) {
         @cmp
     }
 }

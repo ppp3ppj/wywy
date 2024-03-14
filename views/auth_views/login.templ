@@ -67,8 +67,8 @@ templ Login() {
 </div>
 }
 
-templ LoginIndex(cmp templ.Component) {
-    @layout.Base(false) {
+templ LoginIndex(username string, fromProtected bool, cmp templ.Component) {
+    @layout.Base(username, fromProtected, false) {
         @cmp
     }
 }

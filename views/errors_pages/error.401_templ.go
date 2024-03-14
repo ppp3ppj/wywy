@@ -33,6 +33,8 @@ func Error401() templ.Component {
 }
 
 func ErorrIndex(
+	username string,
+	fromProtected,
 	isError bool,
 	cmp templ.Component,
 ) templ.Component {
@@ -63,7 +65,7 @@ func ErorrIndex(
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = layout.Base(false).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layout.Base(username, fromProtected, false).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -1,7 +1,7 @@
 package partials
 
 
-templ Navbar() {
+templ Navbar(username string, fromProtected bool) {
     <!-- Navbar -->
     <div class="navbar bg-base-200">
       <div class="navbar-start">
@@ -49,13 +49,18 @@ templ Navbar() {
         <a class="badge badge-primary px-6 py-4 hover:scale-[1.1] text-lg font-thin" hx-swap="transition:true" href="/login">Sign in</a>
         <a class="badge badge-primary px-6 py-4 hover:scale-[1.1] text-lg font-thin" hx-swap="transition:true" href="/register">Sign up</a>
 
+    if fromProtected {
+        <span class="font-bold text-indigo-700 mr-8">
+            { username }
+        </span>
         <button
             hx-swap="transition:true"
             hx-post="/logout"
             hx-confirm="Are you sure you want to log out?"
             hx-target="body"
             hx-push-url="true"
-            class="btn btn-outline btn-secondary">Secondary</button>
+            class="btn btn-outline btn-secondary">Logout</button>
+    }
       </div>
     </div>
 

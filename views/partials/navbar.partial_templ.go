@@ -10,7 +10,7 @@ import "context"
 import "io"
 import "bytes"
 
-func Navbar() templ.Component {
+func Navbar(username string, fromProtected bool) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -23,7 +23,30 @@ func Navbar() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Navbar --><div class=\"navbar bg-base-200\"><div class=\"navbar-start\"><div class=\"dropdown\"><label tabindex=\"0\" class=\"btn btn-ghost lg:hidden\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 6h16M4 12h8m-8 6h16\"></path></svg></label><ul tabindex=\"0\" class=\"menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52\"><li><a>About</a></li><li><a>Products</a></li><li><a>Contact</a></li></ul></div><a class=\"btn btn-ghost normal-case text-xl\">Logo Heading</a></div><div class=\"navbar-center hidden lg:flex\"><ul class=\"menu menu-horizontal px-1\"><li><a>About</a></li><li><a>Products</a></li><li><a>Contact</a></li></ul></div><div class=\"navbar-end\"><button class=\"btn btn-accent\" hx-swap=\"none\" hx-target=\"#htmx_modal\" hx-on:click=\"daisy_modal.showModal()\">Login</button> <a class=\"badge badge-primary px-6 py-4 hover:scale-[1.1] text-lg font-thin\" hx-swap=\"transition:true\" href=\"/login\">Sign in</a> <a class=\"badge badge-primary px-6 py-4 hover:scale-[1.1] text-lg font-thin\" hx-swap=\"transition:true\" href=\"/register\">Sign up</a> <button hx-swap=\"transition:true\" hx-post=\"/logout\" hx-confirm=\"Are you sure you want to log out?\" hx-target=\"body\" hx-push-url=\"true\" class=\"btn btn-outline btn-secondary\">Secondary</button></div></div><dialog id=\"daisy_modal\" class=\"modal modal-bottom sm:modal-middle\"><div class=\"modal-box\" id=\"htmx_modal\"><h3 class=\"font-bold text-lg\">Hello!</h3><p class=\"py-4\">Press ESC key or click the button below to close</p><div class=\"modal-action\"><form method=\"dialog\"><!-- if there is a button in form, it will close the modal --><button class=\"btn\">Close</button></form></div></div></dialog>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Navbar --><div class=\"navbar bg-base-200\"><div class=\"navbar-start\"><div class=\"dropdown\"><label tabindex=\"0\" class=\"btn btn-ghost lg:hidden\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 6h16M4 12h8m-8 6h16\"></path></svg></label><ul tabindex=\"0\" class=\"menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52\"><li><a>About</a></li><li><a>Products</a></li><li><a>Contact</a></li></ul></div><a class=\"btn btn-ghost normal-case text-xl\">Logo Heading</a></div><div class=\"navbar-center hidden lg:flex\"><ul class=\"menu menu-horizontal px-1\"><li><a>About</a></li><li><a>Products</a></li><li><a>Contact</a></li></ul></div><div class=\"navbar-end\"><button class=\"btn btn-accent\" hx-swap=\"none\" hx-target=\"#htmx_modal\" hx-on:click=\"daisy_modal.showModal()\">Login</button> <a class=\"badge badge-primary px-6 py-4 hover:scale-[1.1] text-lg font-thin\" hx-swap=\"transition:true\" href=\"/login\">Sign in</a> <a class=\"badge badge-primary px-6 py-4 hover:scale-[1.1] text-lg font-thin\" hx-swap=\"transition:true\" href=\"/register\">Sign up</a> ")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if fromProtected {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<span class=\"font-bold text-indigo-700 mr-8\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var2 string
+			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(username)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/navbar.partial.templ`, Line: 53, Col: 22}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span> <button hx-swap=\"transition:true\" hx-post=\"/logout\" hx-confirm=\"Are you sure you want to log out?\" hx-target=\"body\" hx-push-url=\"true\" class=\"btn btn-outline btn-secondary\">Logout</button>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div><dialog id=\"daisy_modal\" class=\"modal modal-bottom sm:modal-middle\"><div class=\"modal-box\" id=\"htmx_modal\"><h3 class=\"font-bold text-lg\">Hello!</h3><p class=\"py-4\">Press ESC key or click the button below to close</p><div class=\"modal-action\"><form method=\"dialog\"><!-- if there is a button in form, it will close the modal --><button class=\"btn\">Close</button></form></div></div></dialog>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
