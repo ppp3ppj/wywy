@@ -50,16 +50,64 @@ templ Base(username string, fromProtected bool, isNav bool) {
 		</head>
 		<body hx-boost="true">
             if isNav {
-                <header>
+                <header 
+                    class="fixed bottom-[calc(100vh-theme(spacing.16))] left-0 right-0 top-0 bg-blue-200">
                     @partials.Navbar(username, fromProtected)
                 </header>
+
+                <div class="flex min-h-screen">
+                @partials.SideBar(fromProtected)
+                <main class="mt-16 flex-1">
+                    { children... }
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                </main>
+            </div>
+            } else {
+                <main>
+                    { children... }
+                </main>
             }
-            <main>
-                <div class="flex">
-                    @partials.SideBar(fromProtected)
-                        { children... }
-                </div>
-            </main>
+            
 		</body>
 	</html>
 }

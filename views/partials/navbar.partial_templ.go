@@ -28,7 +28,7 @@ func Navbar(username string, fromProtected bool) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if fromProtected {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button class=\"btn btn-ghost normal-case text-xl\" hx-get=\"/dashboard\" hx-swap=\"transition:true\" hx-target=\"body\" hx-push-url=\"true\">Dashboard</button>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div>Agent</div><button class=\"btn btn-ghost normal-case text-xl\" hx-get=\"/dashboard\" hx-swap=\"transition:true\" hx-target=\"body\" hx-push-url=\"true\">Dashboard</button>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -50,7 +50,7 @@ func Navbar(username string, fromProtected bool) templ.Component {
 			var templ_7745c5c3_Var2 string
 			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(username)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/navbar.partial.templ`, Line: 39, Col: 22}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/navbar.partial.templ`, Line: 40, Col: 22}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 			if templ_7745c5c3_Err != nil {

@@ -25,7 +25,7 @@ func Home() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Hero --><section class=\"container mx-auto mt-12 mb-4\"><div class=\"hero min-h-[30rem] bg-base-200 rounded\"><div class=\"hero-content text-center\"><div class=\"max-w-4xl\"><h1 class=\"text-6xl md:text-6xl lg:text-8xl font-bold\">Hello There</h1><p class=\"py-6 text-2xl md:text-3xl\">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi aliquid quo repudiandae asperiores nemo omnis sit facere, qui veniam vel.</p><button class=\"btn btn-primary me-2\">Get Started!</button> <button class=\"btn btn-secondary\">Do Something Else!</button> <button class=\"btn btn-primary me-2\" data-toggle-theme=\"dark,light\" data-act-class=\"ACTIVECLASS\">Change Theme</button></div></div></div></section>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Hero --><!--\n<section class=\"container mx-auto mt-12 mb-4\">\n--><div class=\"\"><div class=\"hero-content text-center\"><div class=\"max-w-4xl\"><h1 class=\"text-6xl md:text-6xl lg:text-8xl font-bold\">Hello There</h1><p class=\"py-6 text-2xl md:text-3xl\">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi aliquid quo repudiandae asperiores nemo omnis sit facere, qui veniam vel.</p><button class=\"btn btn-primary me-2\">Get Started!</button> <button class=\"btn btn-secondary\">Do Something Else!</button> <button class=\"btn btn-primary me-2\" data-toggle-theme=\"dark,light\" data-act-class=\"ACTIVECLASS\">Change Theme</button></div></div></div><!--\n</section>\n-->")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
