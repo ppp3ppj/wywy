@@ -6,8 +6,12 @@ templ Navbar(username string, fromProtected bool) {
 
       <div class="navbar-start">
           if fromProtected {
-              <div>Agent</div>
-               <button 
+              <button
+                class="btn btn-ghost normal-case text-xl"
+              >
+                <span class="i-lucide-text"></span>
+              </button>
+                <button 
                     class="btn btn-ghost normal-case text-xl"
                     hx-get="/dashboard"
                     hx-swap="transition:true"

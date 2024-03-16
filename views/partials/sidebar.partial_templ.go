@@ -23,7 +23,7 @@ func SideBar(fromProtected bool) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- SideBar --><aside class=\"sticky top-16 h-[calc(100vh-theme(spacing.16))] min-w-44 overflow-y-auto bg-gray-900\"><div>a</div></aside>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- SideBar --><aside class=\"sticky top-16 h-[calc(100vh-theme(spacing.16))] min-w-44 overflow-y-auto bg-base-200\"><div>a</div></aside>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

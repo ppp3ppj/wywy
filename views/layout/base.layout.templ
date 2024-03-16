@@ -2,7 +2,7 @@ package layout
 
 import "github.com/ppp3ppj/wywy/views/partials"
 
-templ Base(username string, fromProtected bool, isNav bool) {
+templ Base(username string, fromProtected bool, isNav bool, isSideBar bool) {
 <!DOCTYPE html>
 	<html lang="en" data-theme="dark">
 		<head>
@@ -20,15 +20,14 @@ templ Base(username string, fromProtected bool, isNav bool) {
 
 			<link rel="shortcut icon" href="icon.png" type="/image/png"/>
 
-        <!--
 			<link rel="stylesheet" type="text/css" href="/tailwind.css"/>
 
                 <script type="text/javascript" src="/htmx.min.js"></script>
 
-            -->
 
             <script type="text/javascript" src="/theme_change2.0.2.js"></script>
 
+<!--
             <link
               href="https://cdn.jsdelivr.net/npm/daisyui@3.5.1/dist/full.css"
               rel="stylesheet"
@@ -36,6 +35,7 @@ templ Base(username string, fromProtected bool, isNav bool) {
             />
 
             <script src="https://cdn.tailwindcss.com"></script>
+            -->
             <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
             <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
 
@@ -48,60 +48,25 @@ templ Base(username string, fromProtected bool, isNav bool) {
               <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 		</head>
-		<body hx-boost="true">
+		<body hx-boost="false">
             if isNav {
-                <header 
-                    class="fixed bottom-[calc(100vh-theme(spacing.16))] left-0 right-0 top-0 bg-blue-200">
-                    @partials.Navbar(username, fromProtected)
-                </header>
+                    <header 
+                        class="fixed bottom-[calc(100vh-theme(spacing.16))] left-0 right-0 top-0 bg-blue-200">
+                        @partials.Navbar(username, fromProtected)
+                    </header>
 
-                <div class="flex min-h-screen">
-                @partials.SideBar(fromProtected)
-                <main class="mt-16 flex-1">
-                    { children... }
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                    <div>a</div>
-                </main>
-            </div>
+                if isSideBar {
+                    <div class="flex min-h-screen">
+                        @partials.SideBar(fromProtected)
+                        <main class="mt-16 flex-1">
+                            { children... }
+                        </main>
+                    </div>
+                } else {
+                    <main class="mt-16">
+                        { children... }
+                    </main>
+                }
             } else {
                 <main>
                     { children... }

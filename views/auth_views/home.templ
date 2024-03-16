@@ -28,7 +28,7 @@ templ Home() {
 }
 
 templ HomeIndex(username string, fromProtected bool, cmp templ.Component) {
-    @layout.Base(username, fromProtected, true) {
+    @layout.Base(username, fromProtected, true, false) {
         @cmp
     }
 }

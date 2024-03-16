@@ -13,6 +13,8 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@egoist/tailwindcss-icons": "^1.7.4",
+    "@iconify/json": "^2.2.192",
     "daisyui": "latest",
     "tailwindcss": "^3.4.1"
   }

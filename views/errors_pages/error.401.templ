@@ -12,7 +12,7 @@ templ ErorrIndex(
     isError bool,
     cmp templ.Component,
     ) {
-    @layout.Base(username, fromProtected, false) {
+    @layout.Base(username, fromProtected, false, false) {
         @cmp
     }
 }
