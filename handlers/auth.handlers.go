@@ -87,6 +87,8 @@ func (h *AuthHandler) loginHandler(c echo.Context) error {
             Path: "/",
             MaxAge: 3600, // in seconds
             HttpOnly: true,
+            Secure: true,
+            SameSite: http.SameSiteLaxMode,
         }
 
         // Set user as authenticated
