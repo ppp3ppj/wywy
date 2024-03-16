@@ -23,7 +23,7 @@ func Navbar(username string, fromProtected bool) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Navbar --><div class=\"navbar bg-base-200\"><div class=\"navbar-start\"><div class=\"dropdown\"><label tabindex=\"0\" class=\"btn btn-ghost lg:hidden\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 6h16M4 12h8m-8 6h16\"></path></svg></label><ul tabindex=\"0\" class=\"menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52\"><li><a>About</a></li><li><a>Products</a></li><li><a>Contact</a></li></ul></div><a class=\"btn btn-ghost normal-case text-xl\">Logo Heading</a></div><div class=\"navbar-center hidden lg:flex\"><ul class=\"menu menu-horizontal px-1\"><li><a>About</a></li><li><a>Products</a></li><li><a>Contact</a></li></ul></div><div class=\"navbar-end\"><button class=\"btn btn-accent\" hx-swap=\"none\" hx-target=\"#htmx_modal\" hx-on:click=\"daisy_modal.showModal()\">Login</button> <a class=\"badge badge-primary px-6 py-4 hover:scale-[1.1] text-lg font-thin\" hx-swap=\"transition:true\" href=\"/login\">Sign in</a> <a class=\"badge badge-primary px-6 py-4 hover:scale-[1.1] text-lg font-thin\" hx-swap=\"transition:true\" href=\"/register\">Sign up</a> ")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Navbar --><div class=\"navbar bg-base-200\"><div class=\"navbar-start\"><div class=\"dropdown\"><label tabindex=\"0\" class=\"btn btn-ghost lg:hidden\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 6h16M4 12h8m-8 6h16\"></path></svg></label><ul tabindex=\"0\" class=\"menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52\"><li><a>About</a></li><li><a>Products</a></li><li><a>Contact</a></li></ul></div><a class=\"btn btn-ghost normal-case text-xl\">Logo Heading</a></div><div class=\"navbar-center hidden lg:flex\"><ul class=\"menu menu-horizontal px-1\"><li><a>About</a></li><li><a>Products</a></li><li><a>Contact</a></li></ul></div><div class=\"navbar-end\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -35,13 +35,18 @@ func Navbar(username string, fromProtected bool) templ.Component {
 			var templ_7745c5c3_Var2 string
 			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(username)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/navbar.partial.templ`, Line: 53, Col: 22}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/navbar.partial.templ`, Line: 46, Col: 22}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span> <button hx-swap=\"transition:true\" hx-post=\"/logout\" hx-confirm=\"Are you sure you want to log out?\" hx-target=\"body\" hx-push-url=\"true\" class=\"btn btn-outline btn-secondary\">Logout</button>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span><div class=\"dropdown dropdown-end\"><div tabindex=\"0\" role=\"button\" class=\"btn btn-ghost btn-circle avatar\"><div class=\"w-10 rounded-full\"><img alt=\"Tailwind CSS Navbar component\" src=\"https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg\"></div></div><ul tabindex=\"0\" class=\"menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52\"><li><a class=\"justify-between\">Profile <span class=\"badge\">New</span></a></li><li><a>Settings</a></li><li><a hx-swap=\"transition:true\" hx-post=\"/logout\" hx-confirm=\"Are you sure you want to log out?\" hx-target=\"body\" hx-push-url=\"true\">Logout</a></li></ul></div>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		} else {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button class=\"btn btn-accent\" hx-swap=\"none\" hx-target=\"#htmx_modal\" hx-on:click=\"daisy_modal.showModal()\">Login</button> <a class=\"badge badge-primary px-6 py-4 hover:scale-[1.1] text-lg font-thin\" hx-swap=\"transition:true\" href=\"/login\">Sign in</a> <a class=\"badge badge-primary px-6 py-4 hover:scale-[1.1] text-lg font-thin\" hx-swap=\"transition:true\" href=\"/register\">Sign up</a>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

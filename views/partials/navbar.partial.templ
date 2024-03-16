@@ -41,6 +41,36 @@ templ Navbar(username string, fromProtected bool) {
         </ul>
       </div>
       <div class="navbar-end">
+
+    if fromProtected {
+        <span class="font-bold text-indigo-700 mr-8">
+            { username }
+        </span>
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+            <div class="w-10 rounded-full">
+              <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+            </div>
+          </div>
+          <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <li>
+              <a class="justify-between">
+                Profile
+                <span class="badge">New</span>
+              </a>
+            </li>
+            <li><a>Settings</a></li>
+            <li><a
+                hx-swap="transition:true"
+                hx-post="/logout"
+                hx-confirm="Are you sure you want to log out?"
+                hx-target="body"
+                hx-push-url="true">
+                Logout
+            </a></li>
+          </ul>
+        </div>
+    } else {
         <button class="btn btn-accent"
             hx-swap="none"
             hx-target="#htmx_modal"
@@ -48,18 +78,6 @@ templ Navbar(username string, fromProtected bool) {
 
         <a class="badge badge-primary px-6 py-4 hover:scale-[1.1] text-lg font-thin" hx-swap="transition:true" href="/login">Sign in</a>
         <a class="badge badge-primary px-6 py-4 hover:scale-[1.1] text-lg font-thin" hx-swap="transition:true" href="/register">Sign up</a>
-
-    if fromProtected {
-        <span class="font-bold text-indigo-700 mr-8">
-            { username }
-        </span>
-        <button
-            hx-swap="transition:true"
-            hx-post="/logout"
-            hx-confirm="Are you sure you want to log out?"
-            hx-target="body"
-            hx-push-url="true"
-            class="btn btn-outline btn-secondary">Logout</button>
     }
       </div>
     </div>
