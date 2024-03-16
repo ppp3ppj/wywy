@@ -39,6 +39,14 @@ templ Base(username string, fromProtected bool, isNav bool) {
             <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
             <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
 
+
+            <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+              <!-- Alpine Plugins -->
+              <script defer src="https://unpkg.com/@alpinejs/morph@3.x.x/dist/cdn.min.js"></script>
+              <!-- Alpine Core -->
+              <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
 		</head>
 		<body hx-boost="true">
             if isNav {
@@ -47,7 +55,10 @@ templ Base(username string, fromProtected bool, isNav bool) {
                 </header>
             }
             <main>
-                { children... }
+                <div class="flex">
+                    @partials.SideBar(fromProtected)
+                        { children... }
+                </div>
             </main>
 		</body>
 	</html>
