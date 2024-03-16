@@ -12,7 +12,12 @@ var (
     isError bool = false
 )
 
-func SetupRoutes(e *echo.Echo, h *AuthHandler, dh *DashboardHandler) {
+func SetupRoutes(
+    e *echo.Echo,
+    h *AuthHandler,
+    dh *DashboardHandler,
+    uh *UserHandler,
+    ) {
     e.GET("/", h.homeHandler)
     e.GET("/login", h.loginHandler)
     e.GET("/register", h.registerHandler)
@@ -25,7 +30,14 @@ func SetupRoutes(e *echo.Echo, h *AuthHandler, dh *DashboardHandler) {
 
     protectedGroup := e.Group("/dashboard", h.authMiddleware)
     _ = protectedGroup
-    protectedGroup.GET("/", dh.dashboardListHandler)
+    protectedGroup.GET("", dh.dashboardListHandler)
+
+    userProfilesGroup := e.Group("/profiles", h.authMiddleware)
+    _ = userProfilesGroup
+    userProfilesGroup.GET("", uh.profileHomeHandler)
+
+    //userProfilesGroup.GET("/", )
+    //userProfilesGroup.GET("/:user_id", h.authMiddleware)
     /* Protected Routes */
     //protectedGroup.GET("/list", h.)
 

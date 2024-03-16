@@ -51,8 +51,10 @@ func main() {
 
     ds := services.NewDashboardService()
     dh := handlers.NewDashboardHandler(ds)
+
+    uh := handlers.NewUserHandler()
     
-    handlers.SetupRoutes(e, ah, dh)
+    handlers.SetupRoutes(e, ah, dh, uh)
 
 
     e.Logger.Fatal(e.Start(":1323"))

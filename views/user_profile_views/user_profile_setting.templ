@@ -1,0 +1,13 @@
+package user_profile_views
+
+import "github.com/ppp3ppj/wywy/views/layout"
+
+templ UserProfileSetting() {
+    <div>This is user_profile_views</div>
+}
+
+templ UserProfileSettingIndex(username string, fromProtected bool, cmp templ.Component) {
+    @layout.Base(username, fromProtected, true) {
+        @cmp
+    }
+}

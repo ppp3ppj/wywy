@@ -87,6 +87,8 @@ func (h *AuthHandler) loginHandler(c echo.Context) error {
             Path: "/",
             MaxAge: 3600, // in seconds
             HttpOnly: true,
+            Secure: true,
+            SameSite: http.SameSiteLaxMode,
         }
 
         // Set user as authenticated
@@ -100,7 +102,7 @@ func (h *AuthHandler) loginHandler(c echo.Context) error {
         }
         sess.Save(c.Request(), c.Response())
 
-        return c.Redirect(http.StatusSeeOther, "/dashboard/")
+        return c.Redirect(http.StatusSeeOther, "/dashboard")
     //return renderView(c, dashboard_views.DashboardIndex(dashboard_views.DashboardList()))
     }
     return renderView(c, auth_views.LoginIndex(
