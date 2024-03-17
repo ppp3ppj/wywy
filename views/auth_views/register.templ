@@ -84,7 +84,12 @@ templ Register() {
 
                 <div class="text-grey-dark mt-6">
                     Already have an account? 
-                    <a class="no-underline border-b border-blue text-blue" href="../login">
+                    <a
+                        hx-swap="transition:true"
+                        hx-get="/login"
+                        hx-target="body"
+                        hx-push-url="true"
+                        class="no-underline border-b border-blue text-blue">
                         Log in
                     </a>.
                 </div>
@@ -93,7 +98,7 @@ templ Register() {
 }
 
 templ RegisterIndex(username string, fromProtected bool, cmp templ.Component) {
-    @layout.Base(username, fromProtected, false) {
+    @layout.Base(username, fromProtected, false, false) {
         @cmp
     }
 }

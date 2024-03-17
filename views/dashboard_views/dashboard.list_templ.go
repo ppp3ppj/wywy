@@ -25,7 +25,7 @@ func DashboardList() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div>Hi!!! - Dashboard</div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div>Hi!!! - Dashboard</div><div hx-target=\"this\" hx-ext=\"alpine-morph\" hx-swap=\"morph\"><div x-data=\"{ count: 0, replaced: false,\n                     message: &#39;Change me, then press the button!&#39; }\"><input type=\"text\" x-model=\"message\"><div x-text=\"count\"></div><button x-bind:style=\"replaced &amp;&amp; {&#39;backgroundColor&#39;: &#39;#fecaca&#39;}\" x-on:click=\"replaced = true; count++\">Morph</button></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -64,7 +64,7 @@ func DashboardIndex(username string, fromProtected bool, cmp templ.Component) te
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = layout.Base(username, fromProtected, true).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layout.Base(username, fromProtected, true, true).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

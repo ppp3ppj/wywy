@@ -1,13 +1,17 @@
 package partials
 
-
 templ Navbar(username string, fromProtected bool) {
     <!-- Navbar -->
     <div class="navbar bg-base-200">
 
       <div class="navbar-start">
           if fromProtected {
-               <button 
+              <button
+                class="btn btn-ghost normal-case text-xl"
+              >
+                <span class="i-lucide-text"></span>
+              </button>
+                <button 
                     class="btn btn-ghost normal-case text-xl"
                     hx-get="/dashboard"
                     hx-swap="transition:true"
