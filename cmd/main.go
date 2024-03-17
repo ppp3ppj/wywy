@@ -40,6 +40,9 @@ func main() {
     // e.Use(middleware.Logger())
     cfg := config.LoadConfig(envPath())
 
+    // error middleware
+    e.HTTPErrorHandler = handlers.CustomHTTPErrorHandler
+
     // Session middleware
     // Secret Key is JWT_ADMIN_KEY at env.dev
     fmt.Println("Secret Key: ", cfg.Jwt().SecretKey())
