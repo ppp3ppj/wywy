@@ -19,15 +19,20 @@ func CustomHTTPErrorHandler(err error, c echo.Context) {
     var errorPage func(fp bool) templ.Component
 
     switch code { 
+    case 401: // Unauthorized
+        errorPage = errors_pages.Error401
+    case 404: // Not Found
+        errorPage = errors_pages.Error404
     case 500: // Internal Server errorPage
         errorPage = errors_pages.Error500
     }
+
     isError = true
 
     renderView(c, errors_pages.ErorrIndex(
         "",
         fromProtected,
         isError,
-        errorPage(false),
+        errorPage(fromProtected),
     ))
 }
