@@ -10,6 +10,7 @@ import (
 	"github.com/gorilla/sessions"
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
+	"github.com/ppp3ppj/wywy/models"
 	"github.com/ppp3ppj/wywy/services"
 	"github.com/ppp3ppj/wywy/views/auth_views"
 	"github.com/ppp3ppj/wywy/views/auth_views/register_components"
@@ -42,8 +43,9 @@ type AuthHandler struct {
 
 func (h *AuthHandler) homeHandler(c echo.Context) error {
     homeView := auth_views.Home()
+    userNav := models.UserNav{}
     return renderView(c, auth_views.HomeIndex(
-        "",
+        userNav,
         fromProtected,
         homeView,
     ))
@@ -105,8 +107,9 @@ func (h *AuthHandler) loginHandler(c echo.Context) error {
         return c.Redirect(http.StatusSeeOther, "/dashboard")
     //return renderView(c, dashboard_views.DashboardIndex(dashboard_views.DashboardList()))
     }
+    userNav := models.UserNav{}
     return renderView(c, auth_views.LoginIndex(
-        "",
+        userNav,
         fromProtected,
         loginView,
     ))
@@ -148,8 +151,9 @@ func (h *AuthHandler) registerHandler(c echo.Context) error {
         }
         return c.Redirect(http.StatusSeeOther, "/login")
     }
+    userNav := models.UserNav{}
     return renderView(c, auth_views.RegisterIndex(
-        "",
+        userNav,
         fromProtected,
         registerView,
     ))

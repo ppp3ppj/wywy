@@ -32,7 +32,7 @@ func SetupRoutes(
     _ = protectedGroup
     protectedGroup.GET("", dh.dashboardListHandler)
 
-    userProfilesGroup := e.Group("/profiles", h.authMiddleware)
+    userProfilesGroup := e.Group("/profiles/:id", h.authMiddleware)
     _ = userProfilesGroup
     userProfilesGroup.GET("", uh.profileHomeHandler)
 

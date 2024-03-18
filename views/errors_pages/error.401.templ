@@ -1,6 +1,7 @@
 package errors_pages
 
 import "github.com/ppp3ppj/wywy/views/layout"
+import "github.com/ppp3ppj/wywy/models"
 
 templ Error401(fromProtected bool) {
    <div class="bg-base-error-agent h-screen justify-center">
@@ -48,12 +49,12 @@ templ Error401(fromProtected bool) {
 }
 
 templ ErorrIndex(
-    username string,
+    u models.UserNav,
     fromProtected,
     isError bool,
     cmp templ.Component,
     ) {
-    @layout.Base(username, fromProtected, false, false) {
+    @layout.Base(u, fromProtected, false, false) {
         @cmp
     }
 }

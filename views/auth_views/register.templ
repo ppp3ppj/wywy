@@ -1,6 +1,7 @@
 package auth_views
 
 import "github.com/ppp3ppj/wywy/views/layout"
+import "github.com/ppp3ppj/wywy/models"
 
 templ Register() {
 <div class="bg-grey-lighter min-h-screen flex flex-col">
@@ -97,8 +98,8 @@ templ Register() {
 </div>
 }
 
-templ RegisterIndex(username string, fromProtected bool, cmp templ.Component) {
-    @layout.Base(username, fromProtected, false, false) {
+templ RegisterIndex(u models.UserNav, fromProtected bool, cmp templ.Component) {
+    @layout.Base(u, fromProtected, false, false) {
         @cmp
     }
 }
