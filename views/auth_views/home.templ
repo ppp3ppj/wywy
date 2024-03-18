@@ -1,6 +1,7 @@
 package auth_views
 
 import "github.com/ppp3ppj/wywy/views/layout"
+import "github.com/ppp3ppj/wywy/models"
 
 templ Home() {
 <!-- Hero -->
@@ -27,8 +28,8 @@ templ Home() {
 -->
 }
 
-templ HomeIndex(username string, fromProtected bool, cmp templ.Component) {
-    @layout.Base(username, fromProtected, true, false) {
+templ HomeIndex(u models.UserNav, fromProtected bool, cmp templ.Component) {
+    @layout.Base(u, fromProtected, true, false) {
         @cmp
     }
 }

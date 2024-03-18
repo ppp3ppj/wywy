@@ -11,6 +11,7 @@ import "io"
 import "bytes"
 
 import "github.com/ppp3ppj/wywy/views/layout"
+import "github.com/ppp3ppj/wywy/models"
 
 func Error401(fromProtected bool) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
@@ -37,7 +38,7 @@ func Error401(fromProtected bool) templ.Component {
 }
 
 func ErorrIndex(
-	username string,
+	u models.UserNav,
 	fromProtected,
 	isError bool,
 	cmp templ.Component,
@@ -69,7 +70,7 @@ func ErorrIndex(
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = layout.Base(username, fromProtected, false, false).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layout.Base(u, fromProtected, false, false).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

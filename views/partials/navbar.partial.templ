@@ -1,6 +1,10 @@
 package partials
 
-templ Navbar(username string, fromProtected bool) {
+//import	"github.com/labstack/echo-contrib/session"
+
+import "github.com/ppp3ppj/wywy/models"
+
+templ Navbar(u models.UserNav, fromProtected bool) {
     <!-- Navbar -->
     <div class="navbar bg-base-200">
 
@@ -42,7 +46,7 @@ templ Navbar(username string, fromProtected bool) {
 
     if fromProtected {
         <span class="font-bold text-indigo-700 mr-8">
-            { username }
+            { u.Username }
         </span>
         <div class="dropdown dropdown-end">
           <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
@@ -55,11 +59,11 @@ templ Navbar(username string, fromProtected bool) {
               <a 
                 class="justify-between"
                 hx-swap="transition:true"
-                hx-get="/profiles"
+                hx-get={ "/profiles/" + u.Id }
                 hx-target="body"
                 hx-push-url="true">
                 Profile
-                <span class="badge">New</span>
+                <span class="badge">{ u.Username }</span>
               </a>
             </li>
             <li><a>Settings</a></li>
