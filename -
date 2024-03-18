@@ -27,7 +27,7 @@ func (h *UserHandler) profileHomeHandler(c echo.Context) error {
 
     profileView := user_profile_views.UserProfileSetting()
     return renderView(c, user_profile_views.UserProfileSettingIndex(
-        uNav,
+        models.UserNav{},
         fromProtected,
         profileView,
     ))
