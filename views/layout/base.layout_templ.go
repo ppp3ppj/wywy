@@ -11,8 +11,9 @@ import "io"
 import "bytes"
 
 import "github.com/ppp3ppj/wywy/views/partials"
+import "github.com/ppp3ppj/wywy/models"
 
-func Base(username string, fromProtected bool, isNav bool, isSideBar bool) templ.Component {
+func Base(u models.UserNav, fromProtected bool, isNav bool, isSideBar bool) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -34,7 +35,7 @@ func Base(username string, fromProtected bool, isNav bool, isSideBar bool) templ
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = partials.Navbar(username, fromProtected).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = partials.Navbar(u, fromProtected).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

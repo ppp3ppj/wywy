@@ -5,6 +5,7 @@ import (
 
 	"github.com/a-h/templ"
 	"github.com/labstack/echo/v4"
+	"github.com/ppp3ppj/wywy/models"
 	"github.com/ppp3ppj/wywy/views/errors_pages"
 )
 
@@ -30,7 +31,7 @@ func CustomHTTPErrorHandler(err error, c echo.Context) {
     isError = true
 
     renderView(c, errors_pages.ErorrIndex(
-        "",
+        models.UserNav{},
         fromProtected,
         isError,
         errorPage(fromProtected),

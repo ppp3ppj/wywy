@@ -29,12 +29,10 @@ func SetupRoutes(
     registerGroup.POST("/email", h.registerEmailHandler)
 
     protectedGroup := e.Group("/dashboard", h.authMiddleware)
-    _ = protectedGroup
     protectedGroup.GET("", dh.dashboardListHandler)
 
     userProfilesGroup := e.Group("/profiles", h.authMiddleware)
-    _ = userProfilesGroup
-    userProfilesGroup.GET("", uh.profileHomeHandler)
+    userProfilesGroup.GET("/:id", uh.profileHomeHandler)
 
     //userProfilesGroup.GET("/", )
     //userProfilesGroup.GET("/:user_id", h.authMiddleware)

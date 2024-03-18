@@ -1,8 +1,9 @@
 package layout
 
 import "github.com/ppp3ppj/wywy/views/partials"
+import "github.com/ppp3ppj/wywy/models"
 
-templ Base(username string, fromProtected bool, isNav bool, isSideBar bool) {
+templ Base(u models.UserNav, fromProtected bool, isNav bool, isSideBar bool) {
 <!DOCTYPE html>
 	<html lang="en" data-theme="dark">
 		<head>
@@ -52,7 +53,7 @@ templ Base(username string, fromProtected bool, isNav bool, isSideBar bool) {
             if isNav {
                     <header 
                         class="fixed bottom-[calc(100vh-theme(spacing.16))] left-0 right-0 top-0 bg-blue-200">
-                        @partials.Navbar(username, fromProtected)
+                        @partials.Navbar(u, fromProtected)
                     </header>
 
                 if isSideBar {
