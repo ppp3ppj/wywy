@@ -2,8 +2,9 @@ package user_profile_views
 
 import "github.com/ppp3ppj/wywy/views/layout"
 import "github.com/ppp3ppj/wywy/models"
+import "github.com/ppp3ppj/wywy/services"
 
-templ UserProfileSetting() {
+templ UserProfileSetting(user services.User) {
 <div class="p-8 w-9/12">
     <div 
         hx-swap="transition:true"
@@ -28,7 +29,7 @@ Firstname
     <span class="label-text">What is your name?</span>
     <span class="label-text-alt">Top Right label</span>
   </div>
-  <input type="text" placeholder="Firstname" class="input input-bordered"/>
+  <input type="text" placeholder="Firstname" class="input input-bordered"value={ user.Firstname }/>
   <div class="label">
     <span class="label-text-alt">Bottom Left label</span>
     <span class="label-text-alt">Bottom Right label</span>
@@ -45,7 +46,7 @@ Lastname
     <span class="label-text">What is your name?</span>
     <span class="label-text-alt">Top Right label</span>
   </div>
-  <input type="text" placeholder="Lastname" class="input input-bordered"/>
+  <input type="text" placeholder="Lastname" class="input input-bordered" value={ user.Lastname }/>
   <div class="label">
     <span class="label-text-alt">Bottom Left label</span>
     <span class="label-text-alt">Bottom Right label</span>

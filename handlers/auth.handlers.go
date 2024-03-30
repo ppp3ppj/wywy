@@ -14,6 +14,7 @@ import (
 	"github.com/ppp3ppj/wywy/services"
 	"github.com/ppp3ppj/wywy/views/auth_views"
 	"github.com/ppp3ppj/wywy/views/auth_views/register_components"
+	"github.com/ppp3ppj/wywy/views/user_profile_views"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -29,6 +30,7 @@ type AuthService interface {
     CreateUser(user services.User) error
     ValidateEmail(email string) error
     CheckEmail(email string) (services.User, error)
+    GetUserById(id string) (services.User, error)
 }
 
 func NewAuthHandler(us AuthService) *AuthHandler {
@@ -196,6 +198,25 @@ func (h *AuthHandler) authMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 
         return next(c)
     }
+}
+
+func (h *AuthHandler) userProfileHandler(c echo.Context) error {
+    sess, _ := session.Get(auth_sessios_key, c)
+
+    uNav := models.UserNav{
+        Id: sess.Values["user_id"].(string),
+        Username: sess.Values["username"].(string),
+    }
+
+    u, _ := h.UserService.GetUserById(c.Param("id"))
+    fmt.Println("user is ", u)
+    
+    profileView := user_profile_views.UserProfileSetting(u)
+    return renderView(c, user_profile_views.UserProfileSettingIndex(
+        uNav,
+        fromProtected,
+        profileView,
+    ))
 }
 
 func (h *AuthHandler) logoutHandler(c echo.Context) error {

@@ -4,6 +4,7 @@ import (
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
 	"github.com/ppp3ppj/wywy/models"
+	"github.com/ppp3ppj/wywy/services"
 	"github.com/ppp3ppj/wywy/views/user_profile_views"
 )
 
@@ -25,7 +26,8 @@ func (h *UserHandler) profileHomeHandler(c echo.Context) error {
         Username: sess.Values["username"].(string),
     }
 
-    profileView := user_profile_views.UserProfileSetting()
+
+    profileView := user_profile_views.UserProfileSetting(services.User{})
     return renderView(c, user_profile_views.UserProfileSettingIndex(
         uNav,
         fromProtected,

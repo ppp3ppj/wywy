@@ -78,3 +78,21 @@ func (us *UserService) ValidateEmail(email string) error {
     }
     return fmt.Errorf("email not found")
 }
+
+func (us *UserService) GetUserProfile(id string) (User, error) {
+    query := `SELECT id, email, username, first_name, last_name FROM users WHERE id = $1`
+    var u User
+    if err := us.Db.QueryRow(query, id).Scan(&u.Id, &u.Email, &u.Username, &u.Firstname, &u.Lastname); err != nil {
+        return u, fmt.Errorf("user not found")
+    }
+    return u, nil
+}
+
+func (us *UserService) GetUserById(id string) (User, error) {
+    query := `SELECT id, email, username, first_name, last_name FROM users WHERE id = $1`
+    var u User
+    if err := us.Db.QueryRow(query, id).Scan(&u.Id, &u.Email, &u.Username, &u.Firstname, &u.Lastname); err != nil {
+        return u, fmt.Errorf("user not found")
+    }
+    return u, nil
+}
