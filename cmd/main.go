@@ -47,9 +47,17 @@ func main() {
     // Secret Key is JWT_ADMIN_KEY at env.dev
     fmt.Println("Secret Key: ", cfg.Jwt().SecretKey())
     e.Use(session.Middleware(sessions.NewCookieStore([]byte(cfg.Jwt().SecretKey()))))
-    db := db.DbConnect(cfg.Db())
+    //db := db.DbConnect(cfg.Db())
+    conf := config.ConfigGetting()
+    fmt.Println(conf)
+    db := db.NewPostgresDatabase(conf.Database)
+    defer func() {
+        if err := db.Close(); err != nil {
+            log.Fatalf("Failed to close database connection: %v", err)
+        }
+    }()
 
-    us := services.NewUserService(services.User{}, db)
+    us := services.NewUserService(services.User{}, db.Connect())
     ah := handlers.NewAuthHandler(us)
 
     ds := services.NewDashboardService()

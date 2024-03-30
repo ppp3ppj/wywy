@@ -39,6 +39,9 @@ vendor
 apikey.txt
 *.txt
 
+# Config env
+/config/config.yaml
+
 # Example files
 !.air.example.toml
 !.env.example
