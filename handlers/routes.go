@@ -18,6 +18,7 @@ func SetupRoutes(
     dh *DashboardHandler,
     uh *UserHandler,
     ) {
+
     e.GET("/", h.homeHandler)
     e.GET("/login", h.loginHandler)
     e.GET("/register", h.registerHandler)
