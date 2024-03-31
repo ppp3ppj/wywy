@@ -31,7 +31,6 @@ func NewPostgresDatabase(conf *config.Database) *postgresDatabase {
             conf.DBName,
             conf.SSLMode,
         )
-        fmt.Println(dsn)
 
         conn, err := sqlx.Connect("pgx", dsn)
         if err != nil {

@@ -62,7 +62,8 @@ func (s *echoServer) Start() {
 
     s.app.HTTPErrorHandler = handlers.CustomHTTPErrorHandler
 
-    s.app.Use(session.Middleware(sessions.NewCookieStore([]byte("secret"))))
+    fmt.Println("Secret Key: ", s.conf.AppInfo.SecretKey)
+    s.app.Use(session.Middleware(sessions.NewCookieStore([]byte(s.conf.AppInfo.SecretKey))))
 
     us := services.NewUserService(services.User{}, s.db.Connect())
     ah := handlers.NewAuthHandler(us)
