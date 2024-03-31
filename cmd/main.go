@@ -7,15 +7,17 @@ import (
 	"os"
 
 	"github.com/a-h/templ"
-	"github.com/gorilla/sessions"
+//	"github.com/gorilla/sessions"
 	"github.com/ppp3ppj/wywy/config"
 	"github.com/ppp3ppj/wywy/db"
-	"github.com/ppp3ppj/wywy/handlers"
-	"github.com/ppp3ppj/wywy/services"
+//	"github.com/ppp3ppj/wywy/handlers"
+	"github.com/ppp3ppj/wywy/internal/server"
 
-	"github.com/labstack/echo-contrib/session"
+	//"github.com/ppp3ppj/wywy/services"
+
+//	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+//	"github.com/labstack/echo/v4/middleware"
 	//	"github.com/labstack/echo/v4/middleware"
 	//	"github.com/labstack/echo/v4/middleware"
 )
@@ -29,24 +31,24 @@ func envPath() string {
 }
 
 func main() {
-    e := echo.New()
+    //e := echo.New()
     //e.Static("/", "assets")
-    e.Static("/", "public")
-    e.Use(loggerMiddleware)
+//    e.Static("/", "public")
+   // e.Use(loggerMiddleware)
 
     // Cors Middleware
-    e.Use(middleware.CORSWithConfig(middleware.DefaultCORSConfig))
+  //  e.Use(middleware.CORSWithConfig(middleware.DefaultCORSConfig))
 
     // e.Use(middleware.Logger())
-    cfg := config.LoadConfig(envPath())
+ //   cfg := config.LoadConfig(envPath())
 
     // error middleware
-    e.HTTPErrorHandler = handlers.CustomHTTPErrorHandler
+   // e.HTTPErrorHandler = handlers.CustomHTTPErrorHandler
 
     // Session middleware
     // Secret Key is JWT_ADMIN_KEY at env.dev
-    fmt.Println("Secret Key: ", cfg.Jwt().SecretKey())
-    e.Use(session.Middleware(sessions.NewCookieStore([]byte(cfg.Jwt().SecretKey()))))
+//    fmt.Println("Secret Key: ", cfg.Jwt().SecretKey())
+    //e.Use(session.Middleware(sessions.NewCookieStore([]byte(cfg.Jwt().SecretKey()))))
     //db := db.DbConnect(cfg.Db())
     conf := config.ConfigGetting()
     fmt.Println(conf)
@@ -57,6 +59,10 @@ func main() {
         }
     }()
 
+    server := server.NewEchoServer(conf, db)
+    server.Start()
+
+    /*
     us := services.NewUserService(services.User{}, db.Connect())
     ah := handlers.NewAuthHandler(us)
 
@@ -68,7 +74,9 @@ func main() {
     handlers.SetupRoutes(e, ah, dh, uh)
 
 
+
     e.Logger.Fatal(e.Start(":1323"))
+    */
 
 }
 

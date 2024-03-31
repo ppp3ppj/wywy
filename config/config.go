@@ -27,6 +27,13 @@ type (
 		Schema   string `mapstructure:"schema" validate:"required"`
 	}
 
+    App struct {
+        Name        string `mapstructure:"name" validate:"required"`
+        Version     string `mapstructure:"version" validate:"required"`
+        Environment string `mapstructure:"environment" validate:"required"`
+        SecretKey   string `mapstructure:"secretKey" validate:"required"`
+    }
+
 	Server struct {
 		Port         int           `mapstructure:"port" validate:"required"`
 		AllowOrigins []string      `mapstructure:"allowOrigins" validate:"required"`
