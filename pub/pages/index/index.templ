@@ -1,0 +1,16 @@
+package pub_index
+
+import "github.com/ppp3ppj/wywy/pub/variables"
+import "github.com/ppp3ppj/wywy/pub"
+
+templ Index(body pub_variables.BodyOpts) {
+    @pub.Body(pub_variables.BodyOpts{
+        HeaderButtons: body.HeaderButtons,
+        FooterButtons: body.FooterButtons,
+        Component: index(),
+    })
+}
+
+templ index() {
+    <h1>ppp agent</h1>
+}

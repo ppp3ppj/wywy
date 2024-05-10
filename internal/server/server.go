@@ -18,7 +18,9 @@ import (
 	"github.com/ppp3ppj/wywy/config"
 	"github.com/ppp3ppj/wywy/db"
 	"github.com/ppp3ppj/wywy/handlers"
+	"github.com/ppp3ppj/wywy/pkg/admin"
 	"github.com/ppp3ppj/wywy/services"
+	"github.com/ppp3ppj/wywy/template"
 )
 
 
@@ -63,7 +65,13 @@ func (s *echoServer) Start() {
 
     s.app.GET("/v1/health", s.healthCheck)
 
-    s.app.HTTPErrorHandler = handlers.CustomHTTPErrorHandler
+    // Register template
+    template.NewTemplateRenderer(s.app)
+
+    adminGroup := s.app.Group("")
+    admin.NewAdminFrontend(adminGroup)
+
+    //s.app.HTTPErrorHandler = handlers.CustomHTTPErrorHandler
 
     fmt.Println("Secret Key: ", s.conf.AppInfo.SecretKey)
     s.app.Use(session.Middleware(sessions.NewCookieStore([]byte(s.conf.AppInfo.SecretKey))))
@@ -117,6 +125,7 @@ func getTimeOutMiddleware(timeout time.Duration) echo.MiddlewareFunc {
 }
 
 func getCORSMiddleware(allowOrigins []string) echo.MiddlewareFunc {
+    allowOrigins = append(allowOrigins, "*://localhost:*")
     return middleware.CORSWithConfig(middleware.CORSConfig{
         Skipper: middleware.DefaultSkipper,
         AllowOrigins: allowOrigins,

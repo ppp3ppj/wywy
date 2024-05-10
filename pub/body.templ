@@ -1,0 +1,23 @@
+package pub
+
+import "github.com/ppp3ppj/wywy/pub/variables"
+
+templ Body(opts pub_variables.BodyOpts) {
+    <!DOCTYPE html>
+	<html lang="en">
+		<head hx-boost="true">
+			@Header()
+			for _ , head := range opts.ExtraHeaders {
+				@head
+			}
+			<title>wywy</title>
+		</head>
+		<body>
+            @opts.Component
+		</body>
+	</html>
+}
+
+templ Background() {
+    <h2>pppp Background</h2>
+}
