@@ -18,6 +18,16 @@ export default {
           // collections: getIconCollections("all"),
           // and the more recommended way is to use `dynamicIconsPlugin`, see below.
         }),
+        function({ addBase}) {
+            addBase({
+                'html': {
+                    fontSize: "16px", // Default font size, which is typically 16px
+                    '@screen md': {
+                        fontSize: "14px", // Font size on medium (md) breakpoint, which is typically 14px
+                    },
+                },
+            })
+        },
   ],
   daisyui: {
     themes: ["light", "dark"], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
