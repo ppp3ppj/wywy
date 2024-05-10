@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev:tailwind": "bun run build:tailwind -- --watch",
-    "build:tailwind": "tailwindcss -i ./assets/css/styles.css -o ./public/tailwind.css"
+    "build:tailwind": "tailwindcss -i ./src/main.css -o ./dist/tailwind.css"
   },
   "devDependencies": {
     "@types/bun": "latest"
