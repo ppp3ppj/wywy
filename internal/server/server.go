@@ -31,7 +31,7 @@ type echoServer struct {
 var (
     server *echoServer
     once sync.Once
-)   
+)
 
 func NewEchoServer(conf *config.Config, db db.IDatabase) *echoServer {
     echoApp := echo.New()
@@ -51,6 +51,9 @@ func NewEchoServer(conf *config.Config, db db.IDatabase) *echoServer {
 func (s *echoServer) Start() {
     timeOutMiddleware := getTimeOutMiddleware(s.conf.Server.Timeout)
     corsMiddleware := getCORSMiddleware(s.conf.Server.AllowOrigins)
+    //htmxMiddleware := middlewares.HTMXRequest()
+
+    //s.app.Use(htmxMiddleware)
 
     s.app.Use(middleware.Recover())
     s.app.Use(middleware.Logger())
@@ -72,7 +75,7 @@ func (s *echoServer) Start() {
     dh := handlers.NewDashboardHandler(ds)
 
     uh := handlers.NewUserHandler()
-    
+
     handlers.SetupRoutes(s.app, ah, dh, uh)
 
     // Graceful Shutdown
