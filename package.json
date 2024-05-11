@@ -3,6 +3,7 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
+    "dev": "bun run dev.js",
     "dev:tailwind": "bun run build:tailwind -- --watch",
     "build:tailwind": "tailwindcss -i ./src/main.css -o ./dist/tailwind.css"
   },
@@ -16,6 +17,7 @@
     "@egoist/tailwindcss-icons": "^1.7.4",
     "@iconify/json": "^2.2.192",
     "daisyui": "latest",
+    "htmx.org": "^1.9.12",
     "tailwindcss": "^3.4.1"
   }
 }
