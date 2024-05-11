@@ -18,7 +18,9 @@ import (
 	"github.com/ppp3ppj/wywy/config"
 	"github.com/ppp3ppj/wywy/db"
 	"github.com/ppp3ppj/wywy/handlers"
+	"github.com/ppp3ppj/wywy/pkg/admin"
 	"github.com/ppp3ppj/wywy/services"
+	"github.com/ppp3ppj/wywy/template"
 )
 
 
@@ -31,7 +33,7 @@ type echoServer struct {
 var (
     server *echoServer
     once sync.Once
-)   
+)
 
 func NewEchoServer(conf *config.Config, db db.IDatabase) *echoServer {
     echoApp := echo.New()
@@ -51,6 +53,9 @@ func NewEchoServer(conf *config.Config, db db.IDatabase) *echoServer {
 func (s *echoServer) Start() {
     timeOutMiddleware := getTimeOutMiddleware(s.conf.Server.Timeout)
     corsMiddleware := getCORSMiddleware(s.conf.Server.AllowOrigins)
+    //htmxMiddleware := middlewares.HTMXRequest()
+
+    //s.app.Use(htmxMiddleware)
 
     s.app.Use(middleware.Recover())
     s.app.Use(middleware.Logger())
@@ -58,9 +63,18 @@ func (s *echoServer) Start() {
     s.app.Use(timeOutMiddleware)
     s.app.Use(corsMiddleware)
 
+    s.app.Static("/dist", "dist")
+    s.app.Static("/assets", "public/assets")
+
     s.app.GET("/v1/health", s.healthCheck)
 
-    s.app.HTTPErrorHandler = handlers.CustomHTTPErrorHandler
+    // Register template
+    template.NewTemplateRenderer(s.app)
+
+    adminGroup := s.app.Group("")
+    admin.NewAdminFrontend(adminGroup)
+
+    //s.app.HTTPErrorHandler = handlers.CustomHTTPErrorHandler
 
     fmt.Println("Secret Key: ", s.conf.AppInfo.SecretKey)
     s.app.Use(session.Middleware(sessions.NewCookieStore([]byte(s.conf.AppInfo.SecretKey))))
@@ -72,7 +86,7 @@ func (s *echoServer) Start() {
     dh := handlers.NewDashboardHandler(ds)
 
     uh := handlers.NewUserHandler()
-    
+
     handlers.SetupRoutes(s.app, ah, dh, uh)
 
     // Graceful Shutdown
@@ -114,6 +128,7 @@ func getTimeOutMiddleware(timeout time.Duration) echo.MiddlewareFunc {
 }
 
 func getCORSMiddleware(allowOrigins []string) echo.MiddlewareFunc {
+    allowOrigins = append(allowOrigins, "*://localhost:*")
     return middleware.CORSWithConfig(middleware.CORSConfig{
         Skipper: middleware.DefaultSkipper,
         AllowOrigins: allowOrigins,

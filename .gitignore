@@ -41,6 +41,7 @@ apikey.txt
 
 # Config env
 /config/config.yaml
+config.yaml
 
 # Example files
 !.air.example.toml
@@ -56,3 +57,7 @@ apikey.txt
 **/*.log
 package-lock.json
 **/*.bun
+
+# build
+dist
+
