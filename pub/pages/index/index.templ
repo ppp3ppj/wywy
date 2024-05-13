@@ -14,4 +14,16 @@ templ Index(body pub_variables.BodyOpts) {
 
 templ index() {
     <h1>ppp agent 33</h1>
+    <button hx-push-url="true" class="btn btn-primary">Register</button>
+   @userLoginButton("pppp")
+}
+
+templ userLoginButton(path string) {
+    <button
+        hx-get={ path }
+        hx-push-url="true"
+        class="btn btn-secondary"
+    >
+        Login
+    </button>
 }
