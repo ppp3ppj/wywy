@@ -20,6 +20,7 @@ import (
 	"github.com/ppp3ppj/wywy/handlers"
 	"github.com/ppp3ppj/wywy/pkg/admin"
 	"github.com/ppp3ppj/wywy/pkg/dashboard"
+	"github.com/ppp3ppj/wywy/pkg/user"
 	"github.com/ppp3ppj/wywy/services"
 	"github.com/ppp3ppj/wywy/template"
 )
@@ -76,6 +77,8 @@ func (s *echoServer) Start() {
     admin.NewAdminFrontend(adminGroup)
 
     dashboard.NewDashboardFrontend(adminGroup)
+
+    user.NewUserFrontend(adminGroup)
 
     //s.app.HTTPErrorHandler = handlers.CustomHTTPErrorHandler
 
