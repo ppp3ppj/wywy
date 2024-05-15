@@ -64,7 +64,7 @@ CREATE TABLE "two_factor_authentication" (
   "user_id" varchar,
   "method" varchar,
   "verification_code" varchar,
-  "expiry_date" TIMESTAMP 
+  "expiry_date" TIMESTAMP
 );
 
 ALTER TABLE "user_roles" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
