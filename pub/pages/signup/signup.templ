@@ -22,7 +22,7 @@ templ signup() {
                 <h1 class="mb-8 text-3xl text-center">Sign up</h1>
                     <form
                         hx-swap="transition:true"
-                        hx-post="/register"
+                        hx-post="/signup"
                     >
 
                 <div class="mb-3">
@@ -53,11 +53,10 @@ templ signup() {
                         class="input input-bordered input-primary w-full max-w-xs" />
                 </div>
 
-                <div hx-target="this" hx-swap="outerHTML" class="mb-3">
+                <div class="mb-3">
                     <input
                         id="email"
                         name="email"
-                        hx-post="/register/email"
                         type="text"
                         placeholder="Email"
                         placeholder="Type here"

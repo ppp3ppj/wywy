@@ -19,6 +19,7 @@ import (
 	"github.com/ppp3ppj/wywy/db"
 	"github.com/ppp3ppj/wywy/handlers"
 	"github.com/ppp3ppj/wywy/pkg/admin"
+	"github.com/ppp3ppj/wywy/pkg/auth/user_repository"
 	"github.com/ppp3ppj/wywy/pkg/dashboard"
 	"github.com/ppp3ppj/wywy/pkg/user"
 	"github.com/ppp3ppj/wywy/services"
@@ -78,7 +79,8 @@ func (s *echoServer) Start() {
 
     dashboard.NewDashboardFrontend(adminGroup)
 
-    user.NewUserFrontend(adminGroup)
+    userRepo := user_repository.NewUserRepository(s.db.Connect())
+    user.NewUserFrontend(adminGroup, userRepo)
 
     //s.app.HTTPErrorHandler = handlers.CustomHTTPErrorHandler
 
