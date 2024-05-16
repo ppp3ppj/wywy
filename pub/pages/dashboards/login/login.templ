@@ -20,8 +20,7 @@ templ login() {
     <div class="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
       <div class="px-5 py-7">
         <form
-            action=""
-            method="post"
+hx-post="/login"
             hx-swap="transition:true"
             hx-headers="js:{'X-TimeZone': Intl.DateTimeFormat().resolvedOptions().timeZone}"
             class="px-5 py-7">

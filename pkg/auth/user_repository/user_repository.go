@@ -48,3 +48,12 @@ func (us *userRepository) CreateUser(u models.User) error {
     }
     return err
 }
+
+func (ur *userRepository) CheckEmail(email string) (models.User, error) {
+    query := `SELECT id, email, password, username, first_name, last_name FROM users WHERE email = $1`
+    var u models.User
+    if err := ur.Db.QueryRow(query, email).Scan(&u.Id, &u.Email, &u.Password, &u.Username, &u.Firstname, &u.Lastname); err != nil {
+        return u, fmt.Errorf("email not found")
+    }
+    return u, nil
+}

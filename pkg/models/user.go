@@ -11,4 +11,5 @@ type User struct {
 
 type UserRepository interface {
     CreateUser(u User) error
+    CheckEmail(email string) (User, error)
 }
