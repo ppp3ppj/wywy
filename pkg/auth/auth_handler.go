@@ -35,6 +35,7 @@ func NewAuthService(
     }
 
     g.POST("/login", handler.Login)
+    g.GET("/logout", handler.Logout)
         // obtaining the time zone from POST Request
 }
 
@@ -97,4 +98,19 @@ func (h *AuthService) Login(c echo.Context) error {
     }
 
     return template.AssertRender(c, http.StatusOK, login)
+}
+
+func (h *AuthService) Logout(c echo.Context) error {
+    sess, _ := session.Get(auth_sessios_key, c)
+    // Revoke users authenticate-session
+    sess.Values = map[interface{}]interface{}{
+        auth_key: false,
+        user_id_key: "",
+        username_key: "",
+        tz_key: "",
+    }
+
+    sess.Save(c.Request(), c.Response())
+
+    return c.Redirect(http.StatusSeeOther, "/login")
 }
