@@ -10,8 +10,7 @@ import (
 )
 
 func (fe *DashboardFrontend) Login(c echo.Context) error {
-    opts := pub_variables.DashboardOpts{
-    }
+    opts := pub_variables.DashboardOpts{ }
 
     loginVM := pub_dashboard_login.LoginVM{
         Opts: opts,

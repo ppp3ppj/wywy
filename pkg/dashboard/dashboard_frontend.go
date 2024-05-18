@@ -8,8 +8,10 @@ type DashboardFrontend struct {
 
 func NewDashboardFrontend(
     g *echo.Group,
+    authMid echo.MiddlewareFunc,
 ) {
     fe := &DashboardFrontend{}
 
+    g.GET("/dashboard", fe.Todos, authMid)
     g.GET("/dashboard/login", fe.Login)
 }

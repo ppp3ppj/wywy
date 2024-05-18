@@ -25,6 +25,7 @@ import (
 	"github.com/ppp3ppj/wywy/pkg/user"
 	"github.com/ppp3ppj/wywy/services"
 	"github.com/ppp3ppj/wywy/template"
+	"github.com/ppp3ppj/wywy/utils/wywyauth"
 )
 
 
@@ -78,11 +79,12 @@ func (s *echoServer) Start() {
     adminGroup := s.app.Group("")
     admin.NewAdminFrontend(adminGroup)
 
-    dashboard.NewDashboardFrontend(adminGroup)
 
     userRepo := user_repository.NewUserRepository(s.db.Connect())
+    authMid := wywyauth.WywyAuthMiddleware(userRepo)
     user.NewUserFrontend(adminGroup, userRepo)
     auth.NewAuthService(adminGroup, userRepo)
+    dashboard.NewDashboardFrontend(adminGroup, authMid)
 
     //s.app.HTTPErrorHandler = handlers.CustomHTTPErrorHandler
 

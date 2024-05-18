@@ -1,0 +1,17 @@
+package pub_dashboard_todos
+
+import "github.com/ppp3ppj/wywy/pub/variables"
+import "github.com/ppp3ppj/wywy/pub/pages/dashboards"
+
+type TodosVM struct {
+    Opts pub_variables.DashboardOpts
+}
+
+templ Todos(vm TodosVM) {
+    @pub_dashboard.Dashboard(pub_variables.DashboardOpts{
+        Comp: todos(),
+    })
+}
+templ todos() {
+    <h1>Todos Here !! ppagent</h1>
+}
