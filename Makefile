@@ -8,12 +8,12 @@ PORT := 1323
 install:
 	@go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 
-templ: 
+templ:
 	@templ generate -watch -proxy=http://localhost:1323
 
 migrate-create:
 	echo "Creating migration wywy_db"
-	migrate create -ext sql -dir db/migrations -seq wymy_db
+	migrate create -ext sql -dir db/migrations -seq wywy_db
 
 migrate-up:
 	echo "Migrating-up database"

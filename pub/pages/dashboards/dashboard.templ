@@ -1,0 +1,27 @@
+package pub_dashboard
+
+import "github.com/ppp3ppj/wywy/pub"
+import "github.com/ppp3ppj/wywy/pub/variables"
+
+templ Dashboard(opts pub_variables.DashboardOpts) {
+    <!DOCTYPE html>
+	<html lang="en">
+		<head hx-boost="true">
+			@pub.Header()
+			<title>pppp</title>
+		</head>
+		<body id="admin-root" class="bg-base-100">
+            @drawer(opts.Comp)
+		</body>
+	</html>
+}
+
+func RenderRaw(content string) templ.Component {
+    return templ.Raw(content)
+}
+
+templ drawer(comp templ.Component) {
+    <div id="dashboard-content" class="w-full h-full">
+        @comp
+    </div>
+}
